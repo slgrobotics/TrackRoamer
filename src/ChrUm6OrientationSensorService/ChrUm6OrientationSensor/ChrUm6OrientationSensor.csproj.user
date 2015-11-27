@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartAction>Program</StartAction>
+    <StartWorkingDirectory>C:\Microsoft Robotics Dev Studio 4\</StartWorkingDirectory>
+    <StartProgram>C:\Microsoft Robotics Dev Studio 4\bin\dsshost.exe</StartProgram>
+    <StartArguments>/p:50000 /t:50001 /m:"C:\Microsoft Robotics Dev Studio 4\Config\ChrUm6OrientationSensor.manifest.xml"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <StartAction>Program</StartAction>
+    <StartWorkingDirectory>C:\Microsoft Robotics Dev Studio 4\</StartWorkingDirectory>
+    <StartProgram>C:\Microsoft Robotics Dev Studio 4\bin\dsshost.exe</StartProgram>
+    <StartArguments>/p:50000 /t:50001 /m:"C:\Microsoft Robotics Dev Studio 4\Config\ChrUm6OrientationSensor.manifest.xml"</StartArguments>
+  </PropertyGroup>
+</Project>
