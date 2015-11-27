@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<Manifest
+    xmlns="http://schemas.microsoft.com/xw/2004/10/manifest.html"
+    xmlns:this="urn:uuid:9b898d05-d0fd-497e-bd31-d5d10df8b442"
+    xmlns:dssp="http://schemas.microsoft.com/xw/2004/10/dssp.html"
+    xmlns:trackroamerdrive="http://schemas.trackroamer.com/robotics/2011/02/trackroamerdrive.html"
+    >
+
+  <CreateServiceList>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerbot.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerbot.html</dssp:Contract>
+          <dssp:Service>C:\Microsoft Robotics Dev Studio 2008 R3\Config\trackroamer.trackroamerbot.bot.config.xml</dssp:Service>
+          <dssp:PartnerList />
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>this:TrackRoamerBot</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2011/02/trackroamerdrive.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.trackroamer.com/robotics/2011/02/trackroamerdrive.html</dssp:Contract>
+          <dssp:Service>C:\Microsoft Robotics Dev Studio 2008 R3\Config\TrackRoamer.TrackRoamerBot.GenericDrive.Config.xml</dssp:Service>
+          <dssp:PartnerList />
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/motor.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerdrive:LeftMotor</dssp:Name>
+          <dssp:ServiceName>this:LeftMotor</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/motor.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerdrive:RightMotor</dssp:Name>
+          <dssp:ServiceName>this:RightMotor</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/encoder.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerdrive:LeftEncoder</dssp:Name>
+          <dssp:ServiceName>this:LeftEncoder</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/encoder.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerdrive:RightEncoder</dssp:Name>
+          <dssp:ServiceName>this:RightEncoder</dssp:ServiceName>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>this:TrackRoamerDrive</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamermotor.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:LeftMotor</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamermotor.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:RightMotor</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerencoder.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:LeftEncoder</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerencoder.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:RightEncoder</Name>
+    </ServiceRecordType>
+  </CreateServiceList>
+</Manifest>

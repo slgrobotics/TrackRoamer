@@ -1,0 +1,233 @@
+#include <NewSoftSerial.h>
+
+NewSoftSerial UM6Serial(2,3);
+
+int nState = 0;
+#define STATE_ZERO         0
+#define STATE_S            1
+#define STATE_SN           2
+#define STATE_SNP          3
+#define STATE_PT           4
+#define STATE_READ_DATA    5
+#define STATE_CHK1         6
+#define STATE_CHK0         7
+#define STATE_DONE         8 
+
+#define UM6_GET_DATA       0xAE
+#define UM6_QUAT_AB        0x64
+#define UM6_QUAT_CD        0x65
+#define UM6_GYRO_PROC_XY   0x5C
+#define UM6_GYRO_PROC_Z    0x5D
+#define UM6_ACCEL_PROC_XY  0x5E
+#define UM6_ACCEL_PROC_Z   0x5F
+
+#define QUAT_SCALE_FACTOR  0.0000335693   // Convert to Quaternions
+#define ACCEL_SCALE_FACTOR 0.000183105    // Convert to Gravity
+#define GYRO_SCALE_FACTOR  0.0610352      // Convert to Degrees per Second
+
+#define PT_HAS_DATA  0b10000000
+#define PT_IS_BATCH  0b01000000
+#define PT_COMM_FAIL 0b00000001
+
+#define DATA_BUFF_LEN  16
+
+byte aPacketData[DATA_BUFF_LEN];
+int n = 0;
+byte c = 0;
+int nDataByteCount = 0;
+
+typedef struct {
+  boolean HasData;
+  boolean IsBatch;
+  byte BatchLength;
+  boolean CommFail;
+  byte Address;
+  byte Checksum1;
+  byte Checksum0;
+  byte DataLength;
+} UM6_PacketStruct ;
+
+UM6_PacketStruct UM6_Packet;
+
+void setup(){
+  UM6Serial.begin(19200);
+  Serial.begin(19200);
+}
+
+void loop(){
+
+  n = UM6Serial.available();
+  if (n > 0){
+    c = UM6Serial.read();
+    switch(nState){
+      case STATE_ZERO : // Begin. Look for 's'.
+        // Start of new packet...
+        Reset();
+        if (c == 's'){
+          nState = STATE_S;
+        } else {
+          nState = STATE_ZERO;
+        }
+        break;
+      case STATE_S : // Have 's'. Look for 'n'.
+        if (c == 'n'){
+          nState = STATE_SN; 
+        } else {
+          nState = STATE_ZERO;
+        }
+        break;
+      case STATE_SN : // Have 'sn'. Look for 'p'.
+        if (c == 'p'){
+          nState = STATE_SNP; 
+        } else {
+          nState = STATE_ZERO;
+        }
+        break;
+      case STATE_SNP : // Have 'snp'. Read PacketType and calculate DataLength.
+        UM6_Packet.HasData = 1 && (c & PT_HAS_DATA);
+        UM6_Packet.IsBatch = 1 && (c & PT_IS_BATCH);
+        UM6_Packet.BatchLength = ((c >> 2) & 0b00001111);
+        UM6_Packet.CommFail = 1 && (c & PT_COMM_FAIL);
+        nState = STATE_PT;
+        if (UM6_Packet.IsBatch){
+          UM6_Packet.DataLength = UM6_Packet.BatchLength * 4;
+        } else {
+          UM6_Packet.DataLength = 4;
+        }
+        break;
+      case STATE_PT : // Have PacketType. Read Address.
+        UM6_Packet.Address = c;
+        nDataByteCount = 0;
+        nState = STATE_READ_DATA; 
+        break;
+      case STATE_READ_DATA : // Read Data. (UM6_PT.BatchLength * 4) bytes.
+        aPacketData[nDataByteCount] = c;
+        nDataByteCount++;
+        if (nDataByteCount >= UM6_Packet.DataLength){
+          nState = STATE_CHK1;
+        }
+        break;
+      case STATE_CHK1 : // Read Checksum 1
+        UM6_Packet.Checksum1 = c;
+        nState = STATE_CHK0;
+        break;
+      case STATE_CHK0 : // Read Checksum 0
+        UM6_Packet.Checksum0 = c;
+        nState = STATE_DONE;
+        break;
+      case STATE_DONE : // Entire packet consumed. Process packet
+        ProcessPacket();
+        nState = STATE_ZERO;
+        break;
+      }
+    }
+  }
+
+void ProcessPacket(){
+float DataA = 0;
+float DataB = 0;
+float DataC = 0;
+float DataD = 0;
+int i = 0;
+
+//  PrintDebugPacketData();
+  switch(UM6_Packet.Address){
+    case UM6_QUAT_AB :
+      Serial.print("UM6_QUAT_AB : ");
+      if (UM6_Packet.HasData && !UM6_Packet.CommFail){
+        i = (aPacketData[0] << 8) | aPacketData[1];
+        DataA = i * QUAT_SCALE_FACTOR;
+        i = (aPacketData[2] << 8) | aPacketData[3];
+        DataB = i * QUAT_SCALE_FACTOR;
+        if (UM6_Packet.DataLength > 4){
+          i = (aPacketData[4] << 8) | aPacketData[5];
+          DataC = i * QUAT_SCALE_FACTOR;
+          i = (aPacketData[6] << 8) | aPacketData[7];
+          DataD = i * QUAT_SCALE_FACTOR;
+        }
+      }
+      PrintDebugFloatABCD(DataA,DataB,DataC,DataD);
+      break;
+
+    case UM6_ACCEL_PROC_XY :
+      Serial.print("UM6_ACCEL_PROC_XY : ");
+      if (UM6_Packet.HasData && !UM6_Packet.CommFail){
+        i = (aPacketData[0] << 8) | aPacketData[1];
+        DataA = i * ACCEL_SCALE_FACTOR;
+        i = (aPacketData[2] << 8) | aPacketData[3];
+        DataB = i * ACCEL_SCALE_FACTOR;
+        if (UM6_Packet.DataLength > 4){
+          i = (aPacketData[4] << 8) | aPacketData[5];
+          DataC = i * ACCEL_SCALE_FACTOR;
+        }
+      }
+      PrintDebugFloatABCD(DataA,DataB,DataC,DataD);
+      break;
+
+    case UM6_GYRO_PROC_XY :
+      Serial.print("UM6_GYRO_PROC_XY : ");    
+      if (UM6_Packet.HasData && !UM6_Packet.CommFail){
+        i = (aPacketData[0] << 8) | aPacketData[1];
+        DataA = i * GYRO_SCALE_FACTOR;
+        i = (aPacketData[2] << 8) | aPacketData[3];
+        DataB = i * GYRO_SCALE_FACTOR;
+        if (UM6_Packet.DataLength > 4){
+          i = (aPacketData[4] << 8) | aPacketData[5];
+          DataC = i * GYRO_SCALE_FACTOR;
+        }
+      }
+      PrintDebugFloatABCD(DataA,DataB,DataC,DataD);
+      break;
+
+    // case else
+    Serial.println("*** Unknown Packet ***");
+  }
+}
+
+void Reset(){
+  UM6_Packet.HasData = false;
+  UM6_Packet.IsBatch = false;
+  UM6_Packet.BatchLength = 0;
+  UM6_Packet.CommFail = false;
+  UM6_Packet.Address = 0;
+  UM6_Packet.Checksum1 = 0;
+  UM6_Packet.Checksum0 = 0;
+  UM6_Packet.DataLength = 0;
+}
+
+void PrintDebugPacketData(){
+  Serial.print("N = ");
+  Serial.print(n,DEC);
+  Serial.print(" HD = ");
+  Serial.print(UM6_Packet.HasData,BIN);
+  Serial.print(" IB = ");
+  Serial.print(UM6_Packet.IsBatch,BIN);
+  Serial.print(" BL = ");
+  Serial.print(UM6_Packet.BatchLength,DEC);
+  Serial.print(" CF = ");
+  Serial.print(UM6_Packet.CommFail,BIN);
+  Serial.print(" AD = 0x");
+  Serial.print(UM6_Packet.Address,HEX);
+  Serial.print(" CS1 = 0x");
+  Serial.print(UM6_Packet.Checksum1,HEX);
+  Serial.print(" CS0 = 0x");
+  Serial.print(UM6_Packet.Checksum0,HEX);
+  Serial.print(" DL = ");
+  Serial.print(UM6_Packet.DataLength,DEC);
+  Serial.println(".");
+}
+
+void PrintDebugFloatABCD(float a, float b, float c, float d){
+  Serial.print("N = ");
+  Serial.print(n,DEC);
+  Serial.print(" A = ");
+  Serial.print(a,DEC);
+  Serial.print(" B = ");
+  Serial.print(b,DEC);
+  Serial.print(" C = ");
+  Serial.print(c,DEC);
+  Serial.print(" D = ");
+  Serial.print(d,DEC);
+  Serial.println(".");
+}
+

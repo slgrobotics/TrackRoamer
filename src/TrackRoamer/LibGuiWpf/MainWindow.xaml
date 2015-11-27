@@ -1,0 +1,117 @@
+﻿<Window x:Class="TrackRoamer.Robotics.LibGuiWpf.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:my="clr-namespace:TrackRoamer.Robotics.LibGuiWpf"
+    Title="Trackroamer GUI" Height="734" Width="924" Loaded="Window_Loaded">
+    
+    <Window.Resources>
+        <my:RangeReadingConverter x:Key="rangeReadingConverter"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="LightGray" Offset="0"/>
+                    <GradientStop Color="LightBlue" Offset="1"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <my:SweepViewControl HorizontalAlignment="Left" Margin="239,0,0,0" x:Name="sweepViewControlCombo" VerticalAlignment="Top" CurrentValue="{Binding ElementName=sweepSlider, Path=Value, Converter={StaticResource rangeReadingConverter}}" PointerVisible="False" />
+        <my:RobotOrientationViewControl HorizontalAlignment="Left" Margin="669,5,0,0" x:Name="robotOrientationViewControl1" VerticalAlignment="Top" Width="220" Height="260" />
+        <my:RobotDirectionViewControl HorizontalAlignment="Left" Margin="13,5,0,0" x:Name="robotDirectionViewControl1" VerticalAlignment="Top"  Width="220" Height="260"/>
+        <my:ProximityViewControl HorizontalAlignment="Left" Margin="342,153,0,0" x:Name="robotProximityViewControl1" VerticalAlignment="Top" Panel.ZIndex="999" />
+        <my:ParkingSensorViewControl HorizontalAlignment="Left" Margin="342,153,0,0" x:Name="robotParkingSensorViewControl1" VerticalAlignment="Top" Panel.ZIndex="999" />
+        <Button Content="Map" Height="23" HorizontalAlignment="Left" Margin="669,270,0,0" x:Name="mapButton" VerticalAlignment="Top" Width="41" Click="mapButton_Click" />
+        <Slider Height="23" HorizontalAlignment="Left" Margin="41,270,0,0" x:Name="compassSlider" VerticalAlignment="Top" Width="141" Maximum="180" LargeChange="10" Minimum="-180" />
+        <CheckBox Height="16" HorizontalAlignment="Left" Margin="17,274,0,0" x:Name="compassCheckBox" VerticalAlignment="Top" />
+        <TabControl Height="383" HorizontalAlignment="Left" Margin="17,301,0,0" x:Name="tabControl1" VerticalAlignment="Top" Width="874" Background="{x:Null}">
+            <TabItem Header="Status">
+                <Grid>
+                    <GroupBox Header="Proximity Board Commands" Height="160" HorizontalAlignment="Left" Margin="6,6,0,0" Name="groupBox1" VerticalAlignment="Top" Width="852">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*" />
+                                <ColumnDefinition Width="424*" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Settings" Height="173" HorizontalAlignment="Left" Margin="6,172,0,0" Name="groupBox2" VerticalAlignment="Top" Width="852">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="37*" />
+                                <ColumnDefinition Width="803*" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Sonars" Name="tabItemSonar">
+                <Grid>
+                    <my:SweepViewControl HorizontalAlignment="Left" Margin="5,5,0,0" x:Name="sweepViewControlLeft" VerticalAlignment="Top" CurrentValue="{Binding ElementName=sweepSlider, Path=Value, Converter={StaticResource rangeReadingConverter}}"  />
+                    <my:SweepViewControl HorizontalAlignment="Left" Margin="438,5,0,0" x:Name="sweepViewControlRight" VerticalAlignment="Top" CurrentValue="{Binding ElementName=sweepSlider, Path=Value, Converter={StaticResource rangeReadingConverter}}"  />
+                    <Slider Height="23" HorizontalAlignment="Left" Margin="118,304,0,0" Name="sweepSlider" VerticalAlignment="Top" Width="190" Maximum="180" SmallChange="1" LargeChange="30" />
+                    <Label Content="Manual Sweep:" Height="28" HorizontalAlignment="Left" Margin="11,304,0,0" Name="label1" VerticalAlignment="Top" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Sounds">
+                <DockPanel>
+                    <StackPanel Name="toolPanel1" Orientation="Horizontal" DockPanel.Dock="Top">
+                        <ComboBox Height="23" Name="PlaySoundComboBox" Width="720" Margin="5,5,5,5" />
+                        <Button Name="PlaySoundButton" Content="Play Sound" Width="105" Margin="0,5,5,5" Click="PlaySoundButton_Click"></Button>
+                        <Button Content="*" Name="PlayRandomSoundButton" Width="20" Margin="0,5,5,5" Click="PlayRandomSoundButton_Click" />
+                    </StackPanel>
+                    <Label Name="soundsBasePathLabel" Content="soundsBasePathLabel"></Label>
+                    <MediaElement Name="MediaPlayer" />
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="PID Controllers" Name="tabItemPidControllers">
+                <DockPanel>
+                    <GroupBox Header="Angular" Height="225" HorizontalAlignment="Left" Margin="20,20,0,0" Name="groupBoxAngular" VerticalAlignment="Top" Width="256">
+                        <Grid>
+                            <Label Content="K proportional:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label15" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="107,12,0,0" Name="textBoxAngularKp" VerticalAlignment="Top" Width="120" />
+                            <Label Content="K derivative:" Height="28" HorizontalAlignment="Left" Margin="10,70,0,0" Name="label3" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="107,72,0,0" Name="textBoxAngularKd" VerticalAlignment="Top" Width="120" />
+                            <Label Content="K integral:" Height="28" HorizontalAlignment="Left" Margin="10,40,0,0" Name="label4" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="107,42,0,0" Name="textBoxAngularKi" VerticalAlignment="Top" Width="120" />
+                            <Label Content="Max:" Height="28" HorizontalAlignment="Left" Margin="58,101,0,0" Name="label8" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="107,103,0,0" Name="textBoxAngularMax" VerticalAlignment="Top" Width="120" />
+                            <Label Content="Min:" Height="28" HorizontalAlignment="Left" Margin="61,133,0,0" Name="label12" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Right" Margin="0,135,17,0" Name="textBoxAngularMin" VerticalAlignment="Top" Width="120" />
+                            <Label Content="Integral Max:" Height="28" HorizontalAlignment="Left" Margin="17,164,0,0" Name="label9" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="107,169,0,0" Name="textBoxAngularIntegralMax" VerticalAlignment="Top" Width="120" />
+                        </Grid>
+                    </GroupBox>
+                    <DockPanel Height="100" Name="dockPanel1" Margin="10,35,0,0" Width="292" DockPanel.Dock="Left">
+                        <GroupBox Header="Power Scale" Height="70" DockPanel.Dock="Top">
+                          <DockPanel Name="dockPanel2">
+                                <Slider Height="23" LargeChange="0.2" Maximum="1.2" Minimum="0" Name="sliderPowerScale" Width="241" SmallChange="0.05" ValueChanged="sliderPowerScale_ValueChanged" Loaded="sliderPowerScale_Loaded" />
+                                <Label Height="26" Name="labelPowerScale" Content="0" Width="31" FontSize="13" />
+                          </DockPanel>
+                        </GroupBox>
+                        <Button Content="Update PID Controllers, Save State" Height="23" Name="buttonUpdatePidControllers" Click="buttonUpdatePidControllers_Click" DockPanel.Dock="Bottom" Width="240" />
+                    </DockPanel>
+                    <GroupBox Header="Linear" Height="225" HorizontalAlignment="Left" Margin="10,20,0,0" Name="groupBoxLinear" VerticalAlignment="Top" Width="256">
+                        <Grid>
+                            <Label Content="K proportional:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label5" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="107,12,0,0" Name="textBoxLinearKp" VerticalAlignment="Top" Width="120" />
+                            <Label Content="K derivative:" Height="28" HorizontalAlignment="Left" Margin="10,72,0,0" Name="label6" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="107,74,0,0" Name="textBoxLinearKd" VerticalAlignment="Top" Width="120" />
+                            <Label Content="K integral:" Height="28" HorizontalAlignment="Left" Margin="10,42,0,0" Name="label7" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="107,44,0,0" Name="textBoxLinearKi" VerticalAlignment="Top" Width="120" />
+                            <Label Content="Max:" Height="28" HorizontalAlignment="Left" Margin="57,103,0,0" Name="label13" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="107,105,0,0" Name="textBoxLinearMax" VerticalAlignment="Top" Width="120" />
+                            <Label Content="Min:" Height="28" HorizontalAlignment="Left" Margin="61,135,0,0" Name="label14" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="107,137,0,0" Name="textBoxLinearMin" VerticalAlignment="Top" Width="120" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="107,169,0,0" Name="textBoxLinearIntegralMax" VerticalAlignment="Top" Width="120" />
+                            <Label Content="Integral Max:" Height="28" HorizontalAlignment="Left" Margin="17,167,0,0" Name="label10" VerticalAlignment="Top" />
+                        </Grid>
+                    </GroupBox>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+        <Label Content="N Objects" Height="28" HorizontalAlignment="Left" Margin="727,269,0,0" Name="mapperTraceLabel" VerticalAlignment="Top" />
+        <TextBox Height="23" Margin="188,269,669,0" Name="bearingTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="45" Text="0" KeyUp="bearingTextBox_KeyUp" />
+    </Grid>
+</Window>

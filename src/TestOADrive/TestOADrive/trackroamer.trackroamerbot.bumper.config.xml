@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContactSensorArrayState xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:d="http://schemas.microsoft.com/xw/2004/10/dssp.html" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns="http://schemas.microsoft.com/2006/06/contactsensor.html">
+  <Sensors>
+    <ContactSensor>
+      <Name>Front Whisker Left</Name>
+      <HardwareIdentifier>101</HardwareIdentifier>
+      <Pressed>false</Pressed>
+      <Pose>
+        <Position xmlns="http://schemas.microsoft.com/robotics/2006/07/physicalmodel.html">
+          <X>0</X>
+          <Y>0</Y>
+          <Z>0</Z>
+        </Position>
+        <Orientation xmlns="http://schemas.microsoft.com/robotics/2006/07/physicalmodel.html">
+          <X>0</X>
+          <Y>0</Y>
+          <Z>0</Z>
+          <W>0</W>
+        </Orientation>
+      </Pose>
+    </ContactSensor>
+    <ContactSensor>
+      <Name>Front Whisker Right</Name>
+      <HardwareIdentifier>201</HardwareIdentifier>
+      <Pressed>false</Pressed>
+      <Pose>
+        <Position xmlns="http://schemas.microsoft.com/robotics/2006/07/physicalmodel.html">
+          <X>0</X>
+          <Y>0</Y>
+          <Z>0</Z>
+        </Position>
+        <Orientation xmlns="http://schemas.microsoft.com/robotics/2006/07/physicalmodel.html">
+          <X>0</X>
+          <Y>0</Y>
+          <Z>0</Z>
+          <W>0</W>
+        </Orientation>
+      </Pose>
+    </ContactSensor>
+  </Sensors>
+</ContactSensorArrayState>

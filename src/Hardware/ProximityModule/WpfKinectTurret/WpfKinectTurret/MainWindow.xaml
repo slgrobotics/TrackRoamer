@@ -1,0 +1,62 @@
+﻿<Window x:Class="WpfKinectTurret.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Loaded="Window_Loaded" Closed="Window_Closed"
+        ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="550" Width="1240">
+    
+    <StackPanel>
+        <StackPanel.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="LightGray" Offset="0"/>
+                    <GradientStop Color="LightBlue" Offset="1"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </StackPanel.Background>
+        <GroupBox Header="Proximity Board Commands" Height="160" HorizontalAlignment="Left" Margin="10,10,0,0" Name="groupBox1" VerticalAlignment="Top" Width="1206">
+            <Grid Width="1189">
+                <Button Click="pmSafePostureButton_Click" Content="Safe Posture" Height="23" HorizontalAlignment="Left" Margin="6,11,0,0" Name="pmSafePostureButton" VerticalAlignment="Top" Width="93" />
+                <Label Background="#FFF8EFEF" Content="sweep bytes" Height="115" HorizontalAlignment="Left" Margin="1005,9,0,0" Name="pmValuesLabel" VerticalAlignment="Top" Width="174" />
+                <ScrollBar Height="21" HorizontalAlignment="Left" Margin="226,72,0,0" Name="panScrollBar" VerticalAlignment="Top" Width="177" Orientation="Horizontal" ValueChanged="panScrollBar_ValueChanged" Minimum="-30" Maximum="30" Value="0" />
+                <ScrollBar Height="21" HorizontalAlignment="Left" Margin="625,72,0,0" Maximum="30" Minimum="-30" Name="tiltScrollBar" Orientation="Horizontal" Value="0" VerticalAlignment="Top" Width="177" ValueChanged="tiltScrollBar_ValueChanged" />
+                <Label Content="Pan:" Height="28" HorizontalAlignment="Left" Margin="185,72,0,0" Name="label1" VerticalAlignment="Top" />
+                <Label Content="Tilt:" Height="28" HorizontalAlignment="Left" Margin="584,65,0,0" Name="label2" VerticalAlignment="Top" />
+                <CheckBox Content="Enable Kinect Controlling Servos" Height="16" HorizontalAlignment="Left" Margin="6,115,0,0" Name="enableKinectCheckBox" VerticalAlignment="Top" />
+                <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="418,72,0,0" Name="panMksLabel" VerticalAlignment="Top" />
+                <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="817,72,0,0" Name="tiltMksLabel" VerticalAlignment="Top" />
+                <ScrollBar Height="21" HorizontalAlignment="Left" Margin="226,38,0,0" Maximum="50" Minimum="0" Name="panFactorScrollBar" Orientation="Horizontal" Value="15" VerticalAlignment="Top" Width="177" ValueChanged="panFactorScrollBar_ValueChanged" />
+                <Label Content="Pan Factor:" Height="28" HorizontalAlignment="Left" Margin="152,38,0,0" Name="label3" VerticalAlignment="Top" />
+                <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="418,38,0,0" Name="panFactorLabel" VerticalAlignment="Top" />
+                <ScrollBar Height="21" HorizontalAlignment="Right" Margin="0,38,387,0" Maximum="50" Minimum="0" Name="tiltFactorScrollBar" Orientation="Horizontal" Value="15" VerticalAlignment="Top" Width="177" ValueChanged="tiltFactorScrollBar_ValueChanged" />
+                <Label Content="Tilt Factor:" Height="28" HorizontalAlignment="Left" Margin="551,38,0,0" Name="label5" VerticalAlignment="Top" />
+                <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="817,38,0,0" Name="tiltFactorLabel" VerticalAlignment="Top" />
+                <ScrollBar Height="21" HorizontalAlignment="Left" Margin="226,11,0,0" Maximum="500" Minimum="-500" Name="panAlignScrollBar" Orientation="Horizontal" Value="0" VerticalAlignment="Top" Width="177" ValueChanged="panAlignScrollBar_ValueChanged" />
+                <Label Content="Pan Align:" Height="28" HorizontalAlignment="Left" Margin="152,11,0,0" Name="label4" VerticalAlignment="Top" />
+                <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="418,11,0,0" Name="panAlignLabel" VerticalAlignment="Top" />
+                <ScrollBar Height="21" HorizontalAlignment="Right" Margin="0,13,387,0" Maximum="500" Minimum="-500" Name="tiltAlignScrollBar" Orientation="Horizontal" Value="0" VerticalAlignment="Top" Width="177" ValueChanged="tiltAlignScrollBar_ValueChanged" />
+                <Label Content="Tilt Align:" Height="28" HorizontalAlignment="Left" Margin="551,13,0,0" Name="label7" VerticalAlignment="Top" />
+                <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="817,13,0,0" Name="tiltAlignLabel" VerticalAlignment="Top" />
+                <Button Content="Save Alignment" Height="23" HorizontalAlignment="Left" Margin="684,108,0,0" Name="saveAlignmentButton" VerticalAlignment="Top" Width="118" Click="saveAlignmentButton_Click" />
+                <TextBox FontSize="12" Name="frameRate" Focusable="False" BorderThickness="0" Text="0 fps" TextAlignment="Right" Width="50" Margin="6,65,1058,54" />
+                <Button Content="Shoot" Height="23" HorizontalAlignment="Left" Margin="889,101,0,0" Name="shootButton" VerticalAlignment="Top" Width="93" Click="shootButton_Click" />
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="283,108,0,0" Name="trackWhatComboBox" VerticalAlignment="Top" Width="197" SelectionChanged="trackWhatComboBox_SelectionChanged" />
+            </Grid>
+        </GroupBox>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel>
+                <TextBox FontSize="18" Focusable="False" BorderThickness="0" Text="Depth Stream" HorizontalAlignment="Center"/>
+                <Image Width="400" Height="300" Name="depth" Margin="2 0 2 2"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBox FontSize="18" Focusable="False" BorderThickness="0" Text="Skeleton (rendered if full body fits in frame)" HorizontalAlignment="Center"/>
+                <Canvas Width="400" Height="300" Name="skeleton" Margin="2 0 2 2" Background="Black" ClipToBounds="True"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBox FontSize="18" Focusable="False" BorderThickness="0" Text="Color Video Stream" HorizontalAlignment="Center" Name="VideoCaption" />
+                <Image Width="400" Height="300" Name="video" Margin="2 0 2 2"/>
+            </StackPanel>
+        </StackPanel>
+
+    </StackPanel>
+</Window>

@@ -1,0 +1,77 @@
+BODY
+{
+	font-family: Verdana;
+	font-size: smaller;
+}
+table
+{
+	border-right: darkblue thin solid;
+	border-top: darkblue thin solid;
+	border-left: darkblue thin solid;
+	border-bottom: darkblue thin solid;
+}
+table.floating
+{
+	float: left;
+}
+TH
+{
+	text-transform: capitalize;
+	color: #000080;
+	background-color: #DDDDDD;
+	font-variant: small-caps;
+	text-align: left;
+	font-weight: bold;
+}
+
+TH.Major
+{
+	font-size:larger;
+	text-align: center;
+}
+
+TH.caption
+{
+	font-size:larger;
+	text-align: left;
+}
+
+.Container
+{
+	behavior: url(pageObject.htc);
+}
+
+.caption
+{
+	behavior: url(pageObject.htc);
+}
+
+.sizeGrip
+{
+	behavior: url(pageObject.htc);
+}
+
+.minButton
+{
+	behavior: url(pageObject.htc);
+	float: right;
+}
+
+.maxButton
+{
+	behavior: url(pageObject.htc);
+	float: right;
+}
+
+DIV.Container
+{
+	position: absolute;
+	overflow: hidden;
+}
+
+DIV.External
+{
+	position: fixed;
+	overflow: auto;
+}
+

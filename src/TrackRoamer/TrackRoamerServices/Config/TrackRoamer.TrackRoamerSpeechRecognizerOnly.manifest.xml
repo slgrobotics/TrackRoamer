@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--This file was created with the Microsoft Visual Programming Language.-->
+<Manifest xmlns:service="drive" xmlns:dssp="http://schemas.microsoft.com/xw/2004/10/dssp.html"
+          xmlns:this="urn:uuid:9b898d05-d0fd-497e-bd31-d5d10df8b442"
+          xmlns:obstacleavoidancedrive="http://schemas.microsoft.com/2011/07/obstacleavoidancedrive.user.html"
+          xmlns:robotdashboard="http://schemas.microsoft.com/robotics/2011/07/robotdashboard.user.html"
+          xmlns:trackroamerbehaviors="http://schemas.trackroamer.com/robotics/2009/04/trackroamerbehaviors.html"
+          xmlns:usrf="http://schemas.trackroamer.com/robotics/2009/04/usrf.html"
+          xmlns:trackroamerbrickpower="http://schemas.trackroamer.com/robotics/2009/04/trackroamerbrickpower.html"
+          xmlns:trackroamerdrive="http://schemas.trackroamer.com/robotics/2011/02/trackroamerdrive.html"
+          xmlns:trackroamerencoder="http://schemas.trackroamer.com/robotics/2009/04/trackroamerencoder.html"
+          xmlns:trackroamermotor="http://schemas.trackroamer.com/robotics/2009/04/trackroamermotor.html"
+          xmlns:trackroamerbumper="http://schemas.trackroamer.com/robotics/2009/04/trackroamerbumper.html"
+          xmlns:trackroamerrp2011abstractionlayer="http://schemas.trackroamer.com/robotics/2011/12/trackroamerrp2011abstractionlayer.html"
+    		  xmlns:micarrayspeechrecognizergui="http://schemas.microsoft.com/robotics/2011/06/micarrayspeechrecognizergui.user.html" 
+          xmlns="http://schemas.microsoft.com/xw/2004/10/manifest.html">
+  <CreateServiceList>
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/robotics/2011/08/kinect.user.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/08/kinect.user.html</dssp:Contract>
+          <dssp:Service>trackroamer.trackroamerbot.kinect.config.xml</dssp:Service>
+          <dssp:PartnerList />
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>this:UserKinect</Name>
+    </ServiceRecordType>
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/2008/08/kinectui.user.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:KinectUI</Name>
+    </ServiceRecordType>
+
+    <!-- ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/2012/02/pololumaestroservice.html</dssp:Contract>
+    </ServiceRecordType -->
+
+    <!-- ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/robotics/2011/06/micarrayspeechrecognizer.user.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/06/micarrayspeechrecognizer.user.html</dssp:Contract>
+          <dssp:Service>MicArraySpeechRecognizer.user.config.xml</dssp:Service>
+          <dssp:PartnerList />
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>this:SpeechRecognizer</Name>
+    </ServiceRecordType -->
+
+    <!--
+    in MRDS 4 use dsshost32; cannot run micarrayspeechrecognizer directly, it must be launched from micarrayspeechrecognizerGUI and
+    will be using C:\Microsoft Robotics Dev Studio 4\store\MicArraySpeechRecognizer.user.config.xml
+    This project will copy that file from here to the ...\store\.  (see pre-build commands)
+    The GUI will take state from micarrayspeechrecognizer, no way to set it in the PartnerList.
+    -->
+    
+	<ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/robotics/2011/06/micarrayspeechrecognizergui.user.html</dssp:Contract>
+      <dssp:PartnerList />
+      <!-- dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/06/micarrayspeechrecognizer.user.html</dssp:Contract>
+          <dssp:Service>MicArraySpeechRecognizer.user.config.xml</dssp:Service>
+          <dssp:PartnerList />
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+      </dssp:PartnerList -->
+      <Name>this:SpeechRecognizerGui</Name>
+    </ServiceRecordType>
+
+  </CreateServiceList>
+</Manifest>

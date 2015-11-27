@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="TrackRoamer.Robotics.LibGuiWpf.MapperViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="640" d:DesignWidth="834" Loaded="UserControl_Loaded" SizeChanged="UserControl_SizeChanged">
+    <UserControl.Resources>
+        <Pen x:Key="BlackPen1" Thickness="1" Brush="Black"></Pen>
+        <DataTemplate x:Key="TemplateXaml">
+            <!-- DirectionPointer -->
+            <Path Stroke="Black" StrokeThickness="2" 
+                              Width="100" 
+                              Height="20"
+                              Data="M1,50 L100,1 L100,100 z" Stretch="Fill"
+                  >
+                <Path.Fill>
+                    <SolidColorBrush Color="Blue" />
+                </Path.Fill>
+            </Path>
+        </DataTemplate>
+    </UserControl.Resources>
+    <DockPanel Name="mainPanel">
+        <StackPanel Name="TopPanel" DockPanel.Dock="Top" Orientation="Horizontal">
+            <CheckBox Content=":North UP" Name="northUpCheckBox" Unchecked="northUpCheckBox_Changed" Checked="northUpCheckBox_Changed" VerticalAlignment="Center" Margin="5,0,0,0" FlowDirection="RightToLeft" />
+            <Label Content="Latitude:" Margin="15,0,0,0" />
+            <Label Content="N/A" Name="labelLat" Width="160" />
+            <Label Content="Longitude:" />
+            <Label Content="N/A" Name="labelLng" Width="160" />
+        </StackPanel>
+        <Grid Name="mapperPanel">
+            <Canvas Name="canvasRel" Background="#2BFFFF00" Opacity="0.5" />
+            <Canvas Name="canvasGeo" Background="#2BFFFF00" Opacity="0.5" />
+            <Canvas Name="robotPanel" Panel.ZIndex="999" />
+            <Canvas Name="turnPanel" Panel.ZIndex="9999" />
+        </Grid>
+    </DockPanel>
+</UserControl>

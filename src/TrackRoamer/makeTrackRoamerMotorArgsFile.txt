@@ -1,0 +1,22 @@
+# feed it to dssnewservice @<file> --    dssnewservice @makeTrackRoamerMotorArgsFile.txt
+
+# C:\>echo %PATH%
+# C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\;
+# C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\Bin;
+# C:\WINDOWS\system32;
+# C:\WINDOWS;C:\WINDOWS\System32\Wbem;
+# c:\Program Files\Microsoft SQL Server\90\Tools\binn\;
+# C:\Microsoft Robotics Studio (1.0)\bin\
+
+-dir:TrackRoamerMotor
+-service:TrackRoamerMotor
+-assemblyname:TrackRoamerServices
+-namespace:TrackRoamer.Robotics.Services.TrackRoamer.Motor
+-implement:RoboticsCommon.dll						# "C:\Microsoft Robotics Studio (1.0)\bin\services\RoboticsCommon.dll"
+-alt:"http://schemas.microsoft.com/robotics/2006/05/motor.html"
+-year:2007
+-month:04
+-documentation+
+-verbosity:detailed
+-referencepath:"C:\Microsoft Robotics Studio (1.0)\bin"
+

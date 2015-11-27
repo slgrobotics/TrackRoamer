@@ -1,0 +1,78 @@
+﻿<Window x:Class="TrackRoamer.Robotics.WpfProximityModuleDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:libguiwpf="clr-namespace:TrackRoamer.Robotics.LibGuiWpf;assembly=TrackRoamer.Robotics.LibGuiWpf"
+        xmlns:my="clr-namespace:TrackRoamer.Robotics.WpfProximityModuleDemo"
+        Title="Proximity Module Tester" Height="734" Width="924">
+
+    <Window.Resources>
+        <my:RangeReadingConverter x:Key="rangeReadingConverter"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="LightGray" Offset="0"/>
+                    <GradientStop Color="LightBlue" Offset="1"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <libguiwpf:SweepViewControl HorizontalAlignment="Left" Margin="239,0,0,0" x:Name="sweepViewControlCombo" VerticalAlignment="Top" CurrentValue="{Binding ElementName=sweepSlider, Path=Value, Converter={StaticResource rangeReadingConverter}}" PointerVisible="False" Heading="Combined View" />
+        <libguiwpf:RobotOrientationViewControl HorizontalAlignment="Left" Margin="669,5,0,0" Name="robotOrientationViewControl1" VerticalAlignment="Top" Width="220" Height="260" />
+        <libguiwpf:RobotDirectionViewControl HorizontalAlignment="Left" Margin="13,5,0,0" Name="robotDirectionViewControl1" VerticalAlignment="Top"  Width="220" Height="260"/>
+        <libguiwpf:ProximityViewControl HorizontalAlignment="Left" Margin="342,153,0,0" Name="robotProximityViewControl1" VerticalAlignment="Top" Panel.ZIndex="999" />
+        <libguiwpf:ParkingSensorViewControl HorizontalAlignment="Left" Margin="342,153,0,0" Name="robotParkingSensorViewControl1" VerticalAlignment="Top" Panel.ZIndex="999" />
+        <Button Content="Map" Height="23" HorizontalAlignment="Left" Margin="669,270,0,0" Name="mapButton" VerticalAlignment="Top" Width="41" Click="mapButton_Click" />
+        <Slider Height="23" HorizontalAlignment="Right" Margin="0,270,731,0" Name="compassSlider" VerticalAlignment="Top" Width="130" Maximum="180" LargeChange="10" Minimum="-180" ValueChanged="compassSlider_ValueChanged" />
+        <CheckBox Height="16" HorizontalAlignment="Left" Margin="17,274,0,0" Name="compassCheckBox" VerticalAlignment="Top" />
+        <TabControl Height="383" HorizontalAlignment="Left" Margin="17,301,0,0" Name="tabControl1" VerticalAlignment="Top" Width="874" Background="{x:Null}">
+            <TabItem Header="Status">
+                <Grid>
+                    <GroupBox Header="Proximity Board Commands" Height="160" HorizontalAlignment="Left" Margin="6,6,0,0" Name="groupBox1" VerticalAlignment="Top" Width="852">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*" />
+                                <ColumnDefinition Width="424*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Set Default Sweep" Height="23" HorizontalAlignment="Left" Margin="6,10,0,0" Name="pmSetDefaultSweepButton" VerticalAlignment="Top" Width="140" Click="pmSetDefaultSweepButton_Click" Grid.ColumnSpan="2" />
+                            <Button Content="Servo Sweep Start" Height="23" HorizontalAlignment="Left" Margin="139,10,0,0" Name="pmServoSweepStartButton" VerticalAlignment="Top" Width="140" Click="pmServoSweepStartButton_Click" Grid.Column="1" />
+                            <Button Content="Data Continuous Start" Height="23" Margin="286,10,0,0" Name="pmDataContinuousStartButton" VerticalAlignment="Top" Width="140" Click="pmDataContinuousStartButton_Click" HorizontalAlignment="Left" Grid.Column="1" />
+                            <Button Content="Servo Sweep Stop" Height="23" HorizontalAlignment="Left" Margin="139,39,0,0" Name="pmServoSweepStopButton" VerticalAlignment="Top" Width="140" Click="pmServoSweepStopButton_Click" Grid.Column="1" />
+                            <Button Content="Data Continuous Stop" Height="23" HorizontalAlignment="Left" Margin="286,39,0,0" Name="pmDataContinuousStopButton" VerticalAlignment="Top" Width="140" Click="pmDataContinuousStopButton_Click" Grid.Column="1" />
+                            <Button Content="Safe Posture" Height="23" HorizontalAlignment="Left" Margin="6,39,0,0" Name="pmSafePostureButton" VerticalAlignment="Top" Width="140" Click="pmSafePostureButton_Click" Grid.ColumnSpan="2" />
+                            <Label Content="sweep bytes" Height="115" HorizontalAlignment="Left" Margin="440,10,0,0" Name="pmValuesLabel" VerticalAlignment="Top" Width="174" Background="#FFF8EFEF" Grid.Column="1" />
+                            <TextBlock Width="190" HorizontalAlignment="Left" Margin="625,6,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Grid.Column="1" Height="126">
+            If you don't have a Proximity Board connected, move  Manual Sweep slider. If you do have the board, click 3 top buttons left to right to see the sonar operation. More info at 
+            <Hyperlink Click="WebsiteLink_Click" NavigateUri="http://www.trackroamer.com">http://www.trackroamer.com</Hyperlink></TextBlock>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Settings" Height="173" HorizontalAlignment="Left" Margin="6,172,0,0" Name="groupBox2" VerticalAlignment="Top" Width="852">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="37*" />
+                                <ColumnDefinition Width="803*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Update Delay:" Height="28" HorizontalAlignment="Left" Margin="8,6,0,0" Name="label2" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                            <Slider Height="23" HorizontalAlignment="Left" LargeChange="30" Margin="78,6,0,0" Maximum="1000" Name="updateDelaySlider" SmallChange="1" VerticalAlignment="Top" Width="190" Value="300" Grid.Column="1" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Sonars" Name="tabItemSonar">
+                <Grid>
+                    <libguiwpf:SweepViewControl HorizontalAlignment="Left" Margin="5,5,0,0" x:Name="sweepViewControlLeft" VerticalAlignment="Top" CurrentValue="{Binding ElementName=sweepSlider, Path=Value, Converter={StaticResource rangeReadingConverter}}" Heading="Left Sonar" />
+                    <libguiwpf:SweepViewControl HorizontalAlignment="Left" Margin="438,5,0,0" x:Name="sweepViewControlRight" VerticalAlignment="Top" CurrentValue="{Binding ElementName=sweepSlider, Path=Value, Converter={StaticResource rangeReadingConverter}}" Heading="Right Sonar" />
+                    <Slider Height="23" HorizontalAlignment="Left" Margin="118,304,0,0" Name="sweepSlider" VerticalAlignment="Top" Width="190" Maximum="180" SmallChange="1" LargeChange="30" />
+                    <Label Content="Manual Sweep:" Height="28" HorizontalAlignment="Left" Margin="11,304,0,0" Name="label1" VerticalAlignment="Top" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Other">
+                <Canvas Background="Lavender"/>
+            </TabItem>
+        </TabControl>
+        <Label Content="N Objects" Height="28" HorizontalAlignment="Left" Margin="727,269,0,0" Name="mapperTraceLabel" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,270,669,0" Name="bearingTextBox" VerticalAlignment="Top" Width="56" Text="0" KeyUp="bearingTextBox_KeyUp" />
+        <!-- libguiwpf:RobotStateViewControl HorizontalAlignment="Left" Margin="149,300,0,0" Name="robotStateViewControl1" VerticalAlignment="Top" Width="300" Height="300" / -->
+    </Grid>
+</Window>

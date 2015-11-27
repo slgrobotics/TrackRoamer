@@ -1,0 +1,24 @@
+﻿<Window x:Class="WpfLidarLiteTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LIDAR Lite Test" Height="350" Width="525" xmlns:my="clr-namespace:WpfLidarLiteTest"  Loaded="Window_Loaded">
+    <DockPanel>
+        <StackPanel Name="Toolbar" Orientation="Horizontal" DockPanel.Dock="Top" MinHeight="20px">
+            <Label Canvas.Left="16" Canvas.Top="13" Content="Serial Port:" Height="28" Name="label1" />
+            <ComboBox Canvas.Left="89" Canvas.Top="14" Height="23" Name="SerialPortComboBox" Width="120" />
+            <Button Content="Open" Height="23" Name="OpenCloseButton" Width="75" Click="OpenCloseButton_Click" Canvas.Left="215" Canvas.Top="14" />
+        </StackPanel>
+        <StackPanel Name="Statusbar" Orientation="Horizontal" DockPanel.Dock="Bottom" MinHeight="20px">
+            <Label Content="status" Height="28" Name="StatusLabel" />
+        </StackPanel>
+        <DockPanel>
+            <Popup x:Name="ErrorPopup" DockPanel.Dock="Top"  Placement="Center" AllowsTransparency="True"  PopupAnimation="Fade" Width="300px" Height="200px">
+                <Canvas Background="Red">
+                    <Label Name="ErrorTextBlock" Canvas.Left="80px" Canvas.Top="30px">Error</Label>
+                    <Button Content="Exit" Width="100px" Canvas.Left="100px" Canvas.Top="160px" Click="ExitPopupButton_Click"/>
+                </Canvas>
+            </Popup>
+            <my:LidarViewControl x:Name="LidarViewControl" />
+        </DockPanel>
+    </DockPanel>
+</Window>

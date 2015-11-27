@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TrackRoamerBehaviorsState
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://schemas.trackroamer.com/robotics/2007/04/trackroamerbehaviors.html">
+
+	<WheelsEncoderState>
+		<LeftDistance>0</LeftDistance>
+		<LeftSpeed>0</LeftSpeed>
+		<LeftMostRecent>2007-06-02T10:12:55.46875</LeftMostRecent>
+		<RightDistance>0</RightDistance>
+		<RightSpeed>0</RightSpeed>
+		<RightMostRecent>2007-06-02T10:12:55.484375</RightMostRecent>
+	</WheelsEncoderState>
+	<Countdown>0</Countdown>
+	<LogicalState>Unknown</LogicalState>
+	<NewHeading>0</NewHeading>
+	<Velocity>0</Velocity>
+	<Mapped>false</Mapped>
+	<MostRecentLaser>2007-06-02T10:06:12.34375-07:00</MostRecentLaser>
+
+</TrackRoamerBehaviorsState>

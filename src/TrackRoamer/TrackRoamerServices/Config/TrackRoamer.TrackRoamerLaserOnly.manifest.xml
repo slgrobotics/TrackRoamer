@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Manifest
+    xmlns="http://schemas.microsoft.com/xw/2004/10/manifest.html"
+    xmlns:dssp="http://schemas.microsoft.com/xw/2004/10/dssp.html"
+    xmlns:drive="http://schemas.microsoft.com/robotics/2006/05/drive.html"
+    xmlns:simpledashboard="http://schemas.microsoft.com/robotics/2006/01/simpledashboard.html"
+    xmlns:this="http://schemas.trackroamer.com/robotics/2009/04/sample.html"
+    >
+
+  <CreateServiceList>
+
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerdashboard.html</dssp:Contract>
+      <dssp:PartnerList>
+        <!-- dssp:Partner>
+					<dssp:Name>TrackRoamerWebcamStream</dssp:Name>
+				</dssp:Partner -->
+      </dssp:PartnerList>
+    </ServiceRecordType>
+
+    <!-- ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/robotics/2006/01/simpledashboard.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:SimpleDashboard</Name>
+    </ServiceRecordType -->
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2011/01/trackroamerbrickproximityboard.html</dssp:Contract>
+    </ServiceRecordType>
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2011/02/trackroamerusrf.html</dssp:Contract>
+      <Name>this:TrackRoamerUltrasoundRangeFinder</Name>
+    </ServiceRecordType>
+
+  </CreateServiceList>
+
+</Manifest>

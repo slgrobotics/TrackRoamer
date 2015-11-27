@@ -1,0 +1,60 @@
+<RoboticsProject xmlns="clr-namespace:Microsoft.Robotics.Authoring.Project;assembly=Microsoft.VisualProgrammingLanguage.Editor">
+  <RoboticsProject.Settings>
+    <ProjectSettings ClrNamespacePrefix="Robotics" KeyFile="C:\Microsoft Robotics Dev Studio 4\samples\mrisamples.snk" IncludeDebuggingInformation="True" ContractPrefix="http://schemas.tempuri.org" />
+  </RoboticsProject.Settings>
+  <Dataflow Source="Diagrams.xml.compressed" />
+  <ManifestFile Comment="" Source="LEGO.NXT.Tribot.Simulation.Manifest.xml">
+    <TextFile Source="lego.nxt.tribot.simulationenginestate (LEGO.NXT.Tribot.Simulation.Manifest).xml" />
+  </ManifestFile>
+  <ManifestFile Comment="" Source="TrackRoamer.TrackRoamerBot.Manifest.xml">
+    <TextFile Source="trackroamer.trackroamerbot.bot (TrackRoamer.TrackRoamerBot.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.drive (TrackRoamer.TrackRoamerBot.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.bumper (TrackRoamer.TrackRoamerBot.Manifest).xml" />
+  </ManifestFile>
+  <ManifestFile Comment="Name&gt;drive:BumperService&lt;/Name" Source="TrackRoamer.TrackRoamerBot-1.Manifest.xml">
+    <TextFile Source="trackroamer.trackroamerbot.bot (TrackRoamer.TrackRoamerBot-1.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.drive (TrackRoamer.TrackRoamerBot-1.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.bumper (TrackRoamer.TrackRoamerBot-1.Manifest).xml" />
+  </ManifestFile>
+  <ManifestFile Comment="" Source="TrackRoamer.TrackRoamerBot-2.Manifest.xml">
+    <TextFile Source="trackroamer.trackroamerbot.bot (TrackRoamer.TrackRoamerBot-2.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.drive (TrackRoamer.TrackRoamerBot-2.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.bumper (TrackRoamer.TrackRoamerBot-2.Manifest).xml" />
+  </ManifestFile>
+  <ManifestFile Comment="Name&gt;TrackRoamerBumperService&lt;/Name" Source="TrackRoamer.TrackRoamerBot-3.Manifest.xml">
+    <TextFile Source="trackroamer.trackroamerbot.bot (TrackRoamer.TrackRoamerBot-3.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.drive (TrackRoamer.TrackRoamerBot-3.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.bumper (TrackRoamer.TrackRoamerBot-3.Manifest).xml" />
+  </ManifestFile>
+  <ManifestFile Comment="" Source="TrackRoamer.TrackRoamerBot-4.Manifest.xml">
+    <TextFile Source="trackroamer.trackroamerbot.bot (TrackRoamer.TrackRoamerBot-4.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.drive (TrackRoamer.TrackRoamerBot-4.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.bumper (TrackRoamer.TrackRoamerBot-4.Manifest).xml" />
+  </ManifestFile>
+  <ManifestFile Comment="Name&gt;TrackRoamerBumperService&lt;/Name" Source="TrackRoamer.TrackRoamerBot.Bumper.Manifest.xml">
+    <TextFile Source="trackroamer.trackroamerbot.bumper (TrackRoamer.TrackRoamerBot.Bumper.Manifest).xml" />
+  </ManifestFile>
+  <ManifestFile Comment="Name&gt;TrackRoamerBumperService&lt;/Name" Source="TrackRoamer.TrackRoamerBot.Bumper-1.Manifest.xml">
+    <TextFile Source="trackroamer.trackroamerbot.bumper (TrackRoamer.TrackRoamerBot.Bumper-1.Manifest).xml" />
+  </ManifestFile>
+  <ManifestFile Comment="" Source="TrackRoamer.TrackRoamerBot-5.Manifest.xml">
+    <TextFile Source="trackroamer.trackroamerbot.bot (TrackRoamer.TrackRoamerBot-5.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.drive (TrackRoamer.TrackRoamerBot-5.Manifest).xml" />
+  </ManifestFile>
+  <ManifestFile Comment="Name&gt;TrackRoamerBumperService&lt;/Name" Source="TrackRoamer.TrackRoamerBot.Bumper-2.Manifest.xml">
+    <TextFile Source="trackroamer.trackroamerbot.bumper (TrackRoamer.TrackRoamerBot.Bumper-2.Manifest).xml" />
+  </ManifestFile>
+  <ManifestFile Comment="" Source="TrackRoamer.TrackRoamerBot-6.Manifest.xml">
+    <TextFile Source="trackroamer.trackroamerbot.bot (TrackRoamer.TrackRoamerBot-6.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.drive (TrackRoamer.TrackRoamerBot-6.Manifest).xml" />
+  </ManifestFile>
+  <ManifestFile Comment="Name&gt;TrackRoamerBumperService&lt;/Name" Source="TrackRoamer.TrackRoamerBot.Bumper-3.Manifest.xml">
+    <TextFile Source="trackroamer.trackroamerbot.bumper (TrackRoamer.TrackRoamerBot.Bumper-3.Manifest).xml" />
+  </ManifestFile>
+  <ManifestFile Comment="" Source="TrackRoamer.TrackRoamerBot-7.Manifest.xml">
+    <TextFile Source="trackroamer.trackroamerbot.bot (TrackRoamer.TrackRoamerBot-7.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.drive (TrackRoamer.TrackRoamerBot-7.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.bumper (TrackRoamer.TrackRoamerBot-7.Manifest).xml" />
+    <TextFile Source="trackroamer.trackroamerbot.behaviors (TrackRoamer.TrackRoamerBot-7.Manifest).xml" />
+  </ManifestFile>
+</RoboticsProject>

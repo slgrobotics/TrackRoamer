@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SpeechRecognizerState xmlns:s="http://www.w3.org/2003/05/soap-envelope"
+                       xmlns:d="http://schemas.microsoft.com/xw/2004/10/dssp.html"
+                       xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+                       xmlns="http://schemas.microsoft.com/robotics/2011/06/micarrayspeechrecognizer.user.html">
+  <IgnoreAudioInput>false</IgnoreAudioInput>
+  <GrammarType>DictionaryStyle</GrammarType>
+  <DictionaryGrammar>
+    <Elem>
+      <string xmlns="">robot stop now</string>
+      <string xmlns="">stop</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">stop now</string>
+      <string xmlns="">stop</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">robot continue</string>
+      <string xmlns="">continue</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">robot left</string>
+      <string xmlns="">turn left</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">robot right</string>
+      <string xmlns="">turn right</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">robot back up</string>
+      <string xmlns="">back up</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">robot track humans</string>
+      <string xmlns="">track humans</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">robot play game</string>
+      <string xmlns="">track humans</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">here I am</string>
+      <string xmlns="">here I am</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">I am here</string>
+      <string xmlns="">here I am</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">red squirrel</string>
+      <string xmlns="">shoot me</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">white elephant</string>
+      <string xmlns="">shoot me</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">stupid silicon</string>
+      <string xmlns="">shoot me</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">hey rusty</string>
+      <string xmlns="">shoot me</string>
+    </Elem>
+    <Elem>
+      <string xmlns="">who is your master</string>
+      <string xmlns="">your master</string>
+    </Elem>
+  </DictionaryGrammar>
+</SpeechRecognizerState>

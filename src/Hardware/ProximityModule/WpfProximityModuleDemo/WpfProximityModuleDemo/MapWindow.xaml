@@ -1,0 +1,35 @@
+﻿<Window x:Class="TrackRoamer.Robotics.WpfProximityModuleDemo.MapWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:libguiwpf="clr-namespace:TrackRoamer.Robotics.LibGuiWpf;assembly=TrackRoamer.Robotics.LibGuiWpf"
+        Title="MapWindow" Height="765" Width="1082">
+<Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="LightGray" Offset="0"/>
+                    <GradientStop Color="LightBlue" Offset="1"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button Content="Reset" Height="23" HorizontalAlignment="Left" Margin="29,26,0,0" Name="buttonReset" VerticalAlignment="Top" Width="75" Click="buttonReset_Click" />
+        <Button Content="Forward" Height="23" HorizontalAlignment="Left" Margin="73,55,0,0" Name="buttonUp" VerticalAlignment="Top" Width="75" Click="buttonUp_Click" />
+        <Button Content="&lt;&lt;" Height="23" HorizontalAlignment="Left" Margin="29,84,0,0" Name="buttonLeft" VerticalAlignment="Top" Width="75" Click="buttonLeft_Click" />
+        <Button Content="&gt;&gt;" Height="23" HorizontalAlignment="Left" Margin="110,84,0,0" Name="buttonRight" VerticalAlignment="Top" Width="75" Click="buttonRight_Click" />
+        <Button Content="Backup" Height="23" HorizontalAlignment="Left" Margin="73,113,0,0" Name="buttonDown" VerticalAlignment="Top" Width="75" Click="buttonDown_Click" />
+        <StackPanel Height="701" HorizontalAlignment="Left" Margin="200,12,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="848">
+            <libguiwpf:MapperViewControl x:Name="mapperViewControl1" Height="701" MouseMoved="MapperMouseMoved_Handler" Loaded="mapperViewControl1_Loaded" />
+        </StackPanel>
+        <Border BorderBrush="Silver" BorderThickness="1" Name="border1" Width="846" Margin="199,12,15,12" />
+        <Label Content="labelXYMeters" HorizontalAlignment="Left" Margin="12,524,0,96" Name="labelXYMeters" />
+        <Label Content="labelXYGeo" Height="58" HorizontalAlignment="Left" Margin="12,588,0,0" Name="labelXYGeo" VerticalAlignment="Top" />
+        <Label Content="LabelFree" Height="118" HorizontalAlignment="Left" Margin="12,400,0,0" Name="labelFree" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,165,0,0" Name="textBoxRotate" VerticalAlignment="Top" Width="52" Text="10" TextAlignment="Center" />
+        <Button Content="&lt;Rotate" Height="23" HorizontalAlignment="Left" Margin="73,165,0,0" Name="buttonRotateL" VerticalAlignment="Top" Width="57" Click="buttonRotateL_Click" />
+        <Button Content="Rotate&gt;" Height="23" HorizontalAlignment="Right" Margin="0,165,875,0" Name="buttonRotateR" VerticalAlignment="Top" Width="57" Click="buttonRotateR_Click" />
+        <Button Content="Plan Route" Height="23" HorizontalAlignment="Left" Margin="12,208,0,0" Name="planRouteButton" VerticalAlignment="Top" Width="75" Click="planRouteButton_Click" />
+        <Label Content="Best Heading" Height="28" HorizontalAlignment="Left" Margin="12,237,0,0" Name="bestHeadingLabel" VerticalAlignment="Top" />
+        <Label Content="Closest Obstacle" Height="28" HorizontalAlignment="Left" Margin="12,263,0,0" Name="closestObstacleLabel" VerticalAlignment="Top" />
+        <Label Content="Leg Length" Height="28" HorizontalAlignment="Left" Margin="12,288,0,0" Name="legLengthLabel" VerticalAlignment="Top" />
+        <Label Content="Time Spent" Height="28" HorizontalAlignment="Left" Margin="12,314,0,0" Name="timeSpentLabel" VerticalAlignment="Top" />
+    </Grid></Window>

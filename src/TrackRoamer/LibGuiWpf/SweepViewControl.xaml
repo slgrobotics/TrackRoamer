@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="TrackRoamer.Robotics.LibGuiWpf.SweepViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="292" d:DesignWidth="420" MinHeight="292" MinWidth="420" xmlns:my="clr-namespace:TrackRoamer.Robotics.LibGuiWpf">
+    <StackPanel>
+        <GroupBox Header="Proximity" x:Name="groupBox1" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40*" MinHeight="40" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <my:SonarViewControl x:Name="sonarViewControl1" Height="220" Width="400" Grid.Row="1" />
+                <Label Content="pmBearingLabel" Height="28" HorizontalAlignment="Left" Margin="16,6,0,0" Name="pmBearingLabel" VerticalAlignment="Top" />
+                <Label Content="pmRangeLabel" Height="28" HorizontalAlignment="Left" Margin="127,6,0,0" Name="pmRangeLabel" VerticalAlignment="Top" />
+                <Label Content="pmNraysLabel" Height="28" HorizontalAlignment="Left" Margin="230,6,0,0" Name="pmNraysLabel" VerticalAlignment="Top" />
+                <Button Content="Flip" Height="18" HorizontalAlignment="Left" Margin="357,6,0,0" Name="pmFlipSonarButton" VerticalAlignment="Top" Width="35" FontSize="10" />
+            </Grid>
+        </GroupBox>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PanTiltAlignment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <panFactor>14.714814814814819</panFactor>
+  <tiltFactor>30.18518518518518</tiltFactor>
+  <panAlign>-185.18518518518519</panAlign>
+  <tiltAlign>96.296296296295949</tiltAlign>
+</PanTiltAlignment>

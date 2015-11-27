@@ -1,0 +1,81 @@
+﻿<Window x:Class="TrackRoamer.Robotics.Services.TrackRoamerBehaviors.KinectUI"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Kinect Service Viewer"
+        Name="self"
+        Height="465" Width="664"
+        MinHeight="465" MinWidth="664"
+>
+    <DockPanel Name="mainPanel">
+        <StackPanel Name="BottomPanel" DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <GroupBox Header="Additional Skeleton Info" Height="61" HorizontalAlignment="Left" Margin="3,3,0,0" Name="groupBox4" VerticalAlignment="Top" Width="165">
+                <Grid>
+                    <TextBlock Name="SkeletonQualityText" HorizontalAlignment="Left" Margin="4,3,0,3" Text="" Width="146" TextWrapping="Wrap" />
+                </Grid>
+            </GroupBox>
+            <Grid Grid.Column="1" Grid.Row="1" Height="90" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="162" />
+                    <ColumnDefinition Width="121" />
+                    <ColumnDefinition Width="51*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="23" />
+                    <RowDefinition Height="23" />
+                    <RowDefinition Height="23" />
+                    <RowDefinition Height="23" />
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Left" Margin="3,5,0,28" Text="Tilt (degrees):" Grid.RowSpan="2" />
+                <TextBox Name="TiltDegrees"  HorizontalAlignment="Left" Margin="126,4,0,0" VerticalAlignment="Top" Width="36" Grid.ColumnSpan="2" />
+                <Button Content="Update" Click="OnUpdateTilt" HorizontalAlignment="Right" Margin="0,1,28,0" VerticalAlignment="Top" Width="56" Grid.Column="1" />
+                <TextBlock HorizontalAlignment="Left" Margin="3,5,0,0" Text="Device ID:" VerticalAlignment="Top" Grid.Row="3" />
+                <TextBlock Name="DeviceID" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" Width="107" Grid.Column="1" Grid.Row="3" />
+                <TextBlock HorizontalAlignment="Left" Margin="3,6,0,0" Text="Polling Frame rate:" VerticalAlignment="Top" Width="121" Grid.Column="2" />
+                <TextBlock Name="FrameRate" HorizontalAlignment="Left" Margin="0,5,0,0" VerticalAlignment="Top" Width="51" Grid.Column="3" Grid.Row="0" />
+                <TextBlock HorizontalAlignment="Left" Margin="3,5,0,0" Text="Video image Type:" VerticalAlignment="Top" Grid.Row="1" />
+                <TextBlock Name="VideImageType" HorizontalAlignment="Left" Margin="0,2,0,0" Width="156" Grid.Column="1" Grid.Row="1" />
+                <TextBlock HorizontalAlignment="Left" Margin="3,4,0,0" Text="Depth image Type:" VerticalAlignment="Top" Grid.Row="2" />
+                <TextBlock Name="DepthImageType" HorizontalAlignment="Left" Margin="0,2,0,0" Width="156" Grid.Column="1" Grid.Row="2" />
+                <TextBlock HorizontalAlignment="Left" Margin="3,5,0,0" Text="Depth Cam Alternate ?" VerticalAlignment="Top" Width="121" Grid.Column="2" Grid.Row="1" />
+                <TextBlock Name="DepthCamAlternate" HorizontalAlignment="Left" Margin="0,4,0,0" Width="51" Grid.Column="3" Grid.Row="1" />
+                <TextBlock HorizontalAlignment="Left" Margin="3,4,0,0" Text="Web Cam Alternate ?" VerticalAlignment="Top" Width="121" Grid.Column="2" Grid.Row="2" />
+                <TextBlock Name="WebCamAlternate" HorizontalAlignment="Left" Margin="0,3,0,0" Width="51" Grid.Column="3" Grid.Row="2" />
+            </Grid>
+        </StackPanel>
+        <DockPanel Name="TopPanel">
+          <StackPanel DockPanel.Dock="Left">
+            <GroupBox Header="Query Kinect for:" HorizontalAlignment="Left" Margin="3,3,0,0" Name="groupBox2">
+                <Grid Height="56" Width="130">
+                <CheckBox Name="VideoCB" Content="Video" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Checked="VideoCB_Checked" Unchecked="VideoCB_Checked"/>
+                <CheckBox Name="VideoCBProcessed" Content="Processed" HorizontalAlignment="Left" Margin="60,5,0,0" VerticalAlignment="Top" Checked="VideoCBProcessed_Checked" Unchecked="VideoCBProcessed_Checked"/>
+                <CheckBox Name="DepthCB" Content="Depth" HorizontalAlignment="Left" Margin="5,22,0,0" VerticalAlignment="Top" Checked="DepthCB_Checked" Unchecked="DepthCB_Checked" />
+                <CheckBox Name="SkeletalCB" Content="Skeletal" HorizontalAlignment="Left" Margin="5,40,0,0" VerticalAlignment="Top" Checked="SkeletalCB_Checked" Unchecked="SkeletalCB_Checked" />
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Skeletal Smoothing" HorizontalAlignment="Left" Margin="3,3,0,0" Name="groupBox1" VerticalAlignment="Top">
+                <Grid Height="130" Width="130">
+                    <CheckBox Name="TransformSmooth" Content="Transform Smooth" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Checked="TransformSmoothChecked" Unchecked="TransformSmoothChecked" />
+                    <TextBox Name="Smoothing" HorizontalAlignment="Left" Margin="80,22,0,0" VerticalAlignment="Top" Width="46" LostFocus="FieldUpdated" />
+                    <TextBox Name="Correction" HorizontalAlignment="Left" Margin="80,43,0,0" VerticalAlignment="Top" Width="46" LostFocus="FieldUpdated"/>
+                    <TextBox Name="Prediction" HorizontalAlignment="Left" Margin="80,64,0,0" VerticalAlignment="Top" Width="46" LostFocus="FieldUpdated"/>
+                    <TextBox Name="JitterRadius" HorizontalAlignment="Left" Margin="80,85,0,0" VerticalAlignment="Top" Width="46" LostFocus="FieldUpdated"/>
+                    <TextBox Name="MaxDeviationRadius" HorizontalAlignment="Left" Margin="80,106,0,0" VerticalAlignment="Top" Width="46" LostFocus="FieldUpdated"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="22,24,0,0" Text="Smoothing:" />
+                    <TextBlock HorizontalAlignment="Left" Margin="23,45,0,0" Text="Correction:" />
+                    <TextBlock HorizontalAlignment="Left" Margin="25,66,0,0" Text="Prediction:" />
+                    <TextBlock HorizontalAlignment="Left" Margin="12,87,0,0" Text="Jitter Radius:" />
+                    <TextBlock HorizontalAlignment="Left" Margin="3,108,0,0" Text="Max Deviation:" />
+                </Grid>
+            </GroupBox>
+            <TextBlock Name="FPS" Height="23" HorizontalAlignment="Left" Margin="5,35,0,0" Text="Effective FPS: 0" VerticalAlignment="Top" FontSize="16" />
+          </StackPanel>
+          <Grid Name="ImagesPanel" Margin="3,3,3,3">
+            <Image Name="RgbImage" />
+            <Image Name="RgbImageProcessed" />
+            <Image Name="DepthImage" />
+            <Canvas Name="SkeletonCanvas" SizeChanged="SkeletonCanvas_SizeChanged" />
+          </Grid>
+        </DockPanel>
+    </DockPanel>
+</Window>

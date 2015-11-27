@@ -1,0 +1,44 @@
+// This script is just to show you how Wiimote scripts look
+// See the WiimoteScripts folder for real scripts
+
+// set OSC port:
+var.host = "localhost"
+var.oscPort = 9123
+
+// Set keys to wiimote/nunchuk buttons
+var.Up = Wiimote.Up or Wiimote.Classic.Up
+var.Down = Wiimote.Down or Wiimote.Classic.Down
+var.Left = Wiimote.Left or Wiimote.Classic.Left
+var.Right = Wiimote.Right or Wiimote.Classic.Right
+var.A = Wiimote.A or Wiimote.Classic.a
+var.B = Wiimote.B or Wiimote.Classic.b
+var.C = Wiimote.Nunchuk.CButton
+var.One = Wiimote.One
+var.Two = Wiimote.Two
+var.Home = Wiimote.Home or Wiimote.Classic.Home
+var.Minus = Wiimote.Minus or Wiimote.Classic.Minus
+var.NumPadPlus = Wiimote.Plus or Wiimote.Classic.Plus
+var.X = Wiimote.Classic.x
+var.Y = Wiimote.Classic.y
+var.Z = Wiimote.Nunchuk.ZButton or Wiimote.Classic.ZL or Wiimote.Classic.ZR
+var.L = Wiimote.Classic.L
+var.R = Wiimote.Classic.R
+
+// Set the middle two LEDs to ON
+Wiimote.Led1 = false
+Wiimote.Led2 = true
+Wiimote.Led3 = true
+Wiimote.Led4 = false
+
+// Show expansion and wiimote forces
+debug = var.Expansion+';  Bat='+Wiimote.Battery+'; Pitch='+RemoveUnits(Wiimote.Pitch)+' Roll='+RemoveUnits(Wiimote.Roll)+'; '+Wiimote.RelAccX+', '+Wiimote.RelAccY+', '+Wiimote.RelAccZ
+
+//SendOsc(var.host, var.oscPort, "wiimote-mixacc", float(RemoveUnits(Wiimote.RawAcc)), float(RemoveUnits(Wiimote.RelAcc)), float(RemoveUnits(Wiimote.RelAccZ)), float(var.B))
+SendOsc(var.host, var.oscPort, "wiimote-relacc", float(RemoveUnits(Wiimote.RelAccX)), float(RemoveUnits(Wiimote.RelAccY)), float(RemoveUnits(Wiimote.RelAccZ)), float(var.B))
+SendOsc(var.host, var.oscPort, "wiimote-rawacc", float(RemoveUnits(Wiimote.RawAccX)), float(RemoveUnits(Wiimote.RawAccY)), float(RemoveUnits(Wiimote.RawAccZ)), float(var.B))
+SendOsc(var.host, var.oscPort, "wiimote-angles", float(RemoveUnits(Wiimote.Pitch)), float(RemoveUnits(Wiimote.Roll)), float(RemoveUnits(Wiimote.g)))
+SendOsc(var.host, var.oscPort, "wiimote-angles-smooth", float(RemoveUnits(Wiimote.SmoothPitch)), float(RemoveUnits(Wiimote.SmoothRoll)), float(RemoveUnits(Wiimote.g)))
+SendOsc(var.host, var.oscPort, "wiimote-g", float(RemoveUnits(Wiimote.g)), float(RemoveUnits(Wiimote.gx)), float(RemoveUnits(Wiimote.gy)), float(RemoveUnits(Wiimote.gz)), float(var.B))
+//SendOsc(var.host, var.oscPort, "wiimote-accel", float(Wiimote.Battery), float(RemoveUnits(Wiimote.Pitch)), float(RemoveUnits(Wiimote.Roll)), float(RemoveUnits(Wiimote.RelAccX)), float(RemoveUnits(Wiimote.RelAccY)), float(RemoveUnits(Wiimote.RelAccZ)))
+//SendOsc(var.host, var.oscPort, "wiimote-dirpad", float(var.Up), float(var.Down), float(var.Left), float(var.Right))
+

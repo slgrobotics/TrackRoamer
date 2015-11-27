@@ -1,0 +1,110 @@
+﻿<?xml version="1.0"?>
+<!--This file was created with the Microsoft Visual Programming Language.-->
+<Manifest xmlns:service="drive" xmlns:dssp="http://schemas.microsoft.com/xw/2004/10/dssp.html"
+          xmlns:this="urn:uuid:9b898d05-d0fd-497e-bd31-d5d10df8b442"
+          xmlns:robotdashboard="http://schemas.microsoft.com/robotics/2011/07/robotdashboard.user.html"
+          xmlns:trackroamerbehaviors="http://schemas.trackroamer.com/robotics/2009/04/trackroamerbehaviors.html"
+          xmlns:trackroamerbrickpower="http://schemas.trackroamer.com/robotics/2009/04/trackroamerbrickpower.html"
+          xmlns:trackroamerdrive="http://schemas.trackroamer.com/robotics/2011/02/trackroamerdrive.html"
+          xmlns:trackroamerencoder="http://schemas.trackroamer.com/robotics/2009/04/trackroamerencoder.html"
+          xmlns:trackroamermotor="http://schemas.trackroamer.com/robotics/2009/04/trackroamermotor.html"
+          xmlns:trackroamerbumper="http://schemas.trackroamer.com/robotics/2009/04/trackroamerbumper.html"
+          xmlns="http://schemas.microsoft.com/xw/2004/10/manifest.html">
+  <CreateServiceList>
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/robotics/2011/07/robotdashboard.user.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/07/robotdashboard.user.html</dssp:Contract>
+          <dssp:Service>ObstacleAvoidanceDrive.RobotDashboard.user.config.xml</dssp:Service>
+          <dssp:PartnerList />
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/drive.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>this:TrackRoamerDrive</dssp:Name>
+          <dssp:ServiceName>this:TrackRoamerDriveService</dssp:ServiceName>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>this:RobotDashboard</Name>
+    </ServiceRecordType>
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerbrickpower.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:TrackRoamerPowerBrickService</Name>
+    </ServiceRecordType>
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2011/02/trackroamerdrive.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.trackroamer.com/robotics/2011/02/trackroamerdrive.html</dssp:Contract>
+          <dssp:Service>trackroamer.trackroamerbot.drive.config.xml</dssp:Service>
+          <dssp:PartnerList />
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/motor.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerdrive:LeftMotor</dssp:Name>
+          <dssp:ServiceName>this:LeftMotor</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/motor.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerdrive:RightMotor</dssp:Name>
+          <dssp:ServiceName>this:RightMotor</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/encoder.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerdrive:LeftEncoder</dssp:Name>
+          <dssp:ServiceName>this:LeftEncoder</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/encoder.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerdrive:RightEncoder</dssp:Name>
+          <dssp:ServiceName>this:RightEncoder</dssp:ServiceName>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>this:TrackRoamerDriveService</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerbumper.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerbumper.html</dssp:Contract>
+          <dssp:Service>trackroamer.trackroamerbot.bumper.config.xml</dssp:Service>
+          <dssp:PartnerList />
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>this:TrackRoamerBumperService</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamermotor.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:LeftMotor</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamermotor.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:RightMotor</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerencoder.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:LeftEncoder</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerencoder.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:RightEncoder</Name>
+    </ServiceRecordType>
+
+  </CreateServiceList>
+</Manifest>

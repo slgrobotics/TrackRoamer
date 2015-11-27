@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="TrackRoamer.Robotics.LibGuiWpf.SonarViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              mc:Ignorable="d" 
+             d:DesignHeight="220" d:DesignWidth="400" MinWidth="400" MinHeight="220">
+
+    <Grid>
+             <!-- ScannedArea -->
+            <Path x:Name="ScannedArea" Stroke="Pink" StrokeThickness="1" 
+                              Width="400" 
+                              Height="200" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                              Data="M200,200 L200,50 z" Stretch="None"
+                  >
+                <Path.Fill>
+                    <SolidColorBrush Color="Yellow" />
+                </Path.Fill>
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="0" Y="-10" />
+                    </TransformGroup>
+                </Path.RenderTransform>
+
+            </Path>
+
+            <!-- BeamPointer -->
+        <Path x:Name="BeamPointer" Stroke="Red" StrokeThickness="1" 
+                              Width="100" 
+                              Height="6"
+                              Data="M1,50 L100,1 L100,100 z" Stretch="Fill"
+                  >
+                <Path.Fill>
+                    <SolidColorBrush Color="Red" />
+                </Path.Fill>
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="1" />
+                        <RotateTransform CenterX="0" CenterY="3" />
+                        <TranslateTransform X="50" Y="100" />
+                    </TransformGroup>
+                </Path.RenderTransform>
+
+            </Path>
+
+    </Grid>
+</UserControl>

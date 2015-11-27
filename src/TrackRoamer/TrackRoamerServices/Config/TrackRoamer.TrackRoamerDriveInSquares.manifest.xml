@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Manifest
+    xmlns="http://schemas.microsoft.com/xw/2004/10/manifest.html"
+    xmlns:dssp="http://schemas.microsoft.com/xw/2004/10/dssp.html"
+    xmlns:drive="http://schemas.trackroamer.com/robotics/2009/04/trackroamerdrive.html"
+    xmlns:simpledashboard="http://schemas.microsoft.com/robotics/2006/01/simpledashboard.html"
+    xmlns:this="http://schemas.trackroamer.com/robotics/2009/04/mysample.html"
+    >
+
+  <CreateServiceList>
+
+    <!-- Start TrackRoamerBrickPower Hardware controller -->
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerbrickpower.html</dssp:Contract>
+
+      <dssp:PartnerList>
+        <!--Initial TrackRoamerBrickPower config file -->
+        <dssp:Partner>
+          <dssp:Service>TrackRoamer.TrackRoamerBrickPower.Config.xml</dssp:Service>
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+      </dssp:PartnerList>
+
+      <Name>TrackRoamerPowerBrickService</Name>
+
+    </ServiceRecordType>
+
+    <!-- Start the TrackRoamer drive service -->
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerdrive.html</dssp:Contract>
+      <dssp:PartnerList>
+        <!--Initial state partner - load state and all drive physical measurements from the drive Configuration File -->
+        <dssp:Partner>
+          <dssp:Service>TrackRoamer.TrackRoamerBot.Drive.Config.xml</dssp:Service>
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+
+        <!-- dssp:Partner>
+					<dssp:Name>drive:BumperService</dssp:Name>
+				</dssp:Partner -->
+
+        <dssp:Partner>
+          <dssp:Name>drive:LeftMotor</dssp:Name>
+        </dssp:Partner>
+
+        <dssp:Partner>
+          <dssp:Name>drive:RightMotor</dssp:Name>
+        </dssp:Partner>
+
+        <dssp:Partner>
+          <dssp:Name>drive:LeftEncoder</dssp:Name>
+        </dssp:Partner>
+
+        <dssp:Partner>
+          <dssp:Name>drive:RightEncoder</dssp:Name>
+        </dssp:Partner>
+
+      </dssp:PartnerList>
+
+      <Name>TrackRoamerDrive</Name>
+
+    </ServiceRecordType>
+
+    <!-- The following section creates the services that the generic drive requires as partners -->
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerbumper.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Service>TrackRoamer.TrackRoamerBot.Bumper.Config.xml</dssp:Service>
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>TrackRoamerBumperService</Name>
+    </ServiceRecordType>
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamermotor.html</dssp:Contract>
+      <Name>drive:LeftMotor</Name>
+    </ServiceRecordType>
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamermotor.html</dssp:Contract>
+      <Name>drive:RightMotor</Name>
+    </ServiceRecordType>
+
+    <!--The TrackRoamerBot encoder services -->
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerencoder.html</dssp:Contract>
+      <Name>drive:LeftEncoder</Name>
+    </ServiceRecordType>
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerencoder.html</dssp:Contract>
+      <Name>drive:RightEncoder</Name>
+    </ServiceRecordType>
+
+    
+    <!-- Behaviors section: -->
+    
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/robotics/2008/09/driveinsquare.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:driveinsquare</Name>
+    </ServiceRecordType>
+
+  </CreateServiceList>
+
+</Manifest>

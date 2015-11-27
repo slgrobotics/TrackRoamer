@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TrackRoamerBotState
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://schemas.trackroamer.com/robotics/2007/04/trackroamerbot.html">
+
+	<Configuration>
+		   
+		<!-- we need at least a 1 ms sleep here otherwise there will be 100% CPU and errors on serial comm -->
+		<Delay>1</Delay>
+		
+		<!-- *** CONFIGURE THE ROBOTEQ CONTROLLER SERIAL PORT HERE *** -->
+		<SerialPort>4</SerialPort>
+		<!-- *** CONFIGURE THE ROBOTEQ CONTROLLER SERIAL PORT HERE *** -->
+		
+	</Configuration>
+
+	<Connected>false</Connected>
+	
+	<FrameCounter>0</FrameCounter>
+	<FrameRate>0</FrameRate>
+	<ErrorCounter>0</ErrorCounter>
+	<ErrorRate>0</ErrorRate>
+
+	<MotorSpeed>
+		<LeftSpeed xsi:nil="true" />
+		<RightSpeed xsi:nil="true" />
+	</MotorSpeed>
+	
+	<InfraRed>
+		<FrontWhiskerLeft>false</FrontWhiskerLeft>
+		<FrontIrBumperLeft>false</FrontIrBumperLeft>
+		<FrontStepSensorLeft>false</FrontStepSensorLeft>
+
+		<FrontWhiskerRight>false</FrontWhiskerRight>
+		<FrontIrBumperRight>false</FrontIrBumperRight>
+		<FrontStepSensorRight>false</FrontStepSensorRight>
+
+		<RearIrBumperLeft>false</RearIrBumperLeft>
+		<RearStepSensorLeft>false</RearStepSensorLeft>
+
+		<RearIrBumperRight>false</RearIrBumperRight>
+		<RearStepSensorRight>false</RearStepSensorRight>
+	</InfraRed>
+	
+</TrackRoamerBotState>

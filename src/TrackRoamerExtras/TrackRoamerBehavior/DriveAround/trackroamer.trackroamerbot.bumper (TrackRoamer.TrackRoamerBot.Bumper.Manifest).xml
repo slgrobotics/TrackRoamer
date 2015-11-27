@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContactSensorArrayState
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://schemas.microsoft.com/2006/06/contactsensor.html">
+
+	<Sensors>
+
+		<!-- HardwareIdentifier coding:
+			  1st digit   1=Left 2=Right
+			  2d  digit   0=Front 1=Rear
+			  3d  digit   1=Whisker 2=IRBumper 3=StepSensor
+		-->
+		<ContactSensor>
+			<Name>Front Whisker Left</Name>
+			<HardwareIdentifier>101</HardwareIdentifier>
+			<TimeStamp>0001-01-01T00:00:00</TimeStamp>
+			<Pressed>false</Pressed>
+		</ContactSensor>
+		<ContactSensor>
+			<Name>Front IR Bumper Left</Name>
+			<HardwareIdentifier>102</HardwareIdentifier>
+			<TimeStamp>0001-01-01T00:00:00</TimeStamp>
+			<Pressed>false</Pressed>
+		</ContactSensor>
+		<ContactSensor>
+			<Name>Front Step Sensor Left</Name>
+			<HardwareIdentifier>103</HardwareIdentifier>
+			<TimeStamp>0001-01-01T00:00:00</TimeStamp>
+			<Pressed>false</Pressed>
+		</ContactSensor>
+
+		<ContactSensor>
+			<Name>Front Whisker Right</Name>
+			<HardwareIdentifier>201</HardwareIdentifier>
+			<TimeStamp>0001-01-01T00:00:00</TimeStamp>
+			<Pressed>false</Pressed>
+		</ContactSensor>
+		<ContactSensor>
+			<Name>Front IR Bumper Right</Name>
+			<HardwareIdentifier>202</HardwareIdentifier>
+			<TimeStamp>0001-01-01T00:00:00</TimeStamp>
+			<Pressed>false</Pressed>
+		</ContactSensor>
+		<ContactSensor>
+			<Name>Front Step Sensor Right</Name>
+			<HardwareIdentifier>203</HardwareIdentifier>
+			<TimeStamp>0001-01-01T00:00:00</TimeStamp>
+			<Pressed>false</Pressed>
+		</ContactSensor>
+
+
+		<ContactSensor>
+			<Name>Rear IR Bumper Left</Name>
+			<HardwareIdentifier>112</HardwareIdentifier>
+			<TimeStamp>0001-01-01T00:00:00</TimeStamp>
+			<Pressed>false</Pressed>
+		</ContactSensor>
+		<ContactSensor>
+			<Name>Rear Step Sensor Left</Name>
+			<HardwareIdentifier>113</HardwareIdentifier>
+			<TimeStamp>0001-01-01T00:00:00</TimeStamp>
+			<Pressed>false</Pressed>
+		</ContactSensor>
+		
+		<ContactSensor>
+			<Name>Rear IR Bumper Right</Name>
+			<HardwareIdentifier>212</HardwareIdentifier>
+			<TimeStamp>0001-01-01T00:00:00</TimeStamp>
+			<Pressed>false</Pressed>
+		</ContactSensor>
+		<ContactSensor>
+			<Name>Rear Step Sensor Right</Name>
+			<HardwareIdentifier>213</HardwareIdentifier>
+			<TimeStamp>0001-01-01T00:00:00</TimeStamp>
+			<Pressed>false</Pressed>
+		</ContactSensor>
+
+		
+	</Sensors>
+</ContactSensorArrayState>

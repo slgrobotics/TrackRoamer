@@ -1,0 +1,64 @@
+﻿<Window x:Class="TrackRoamer.Robotics.LibGuiWpf.MapWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:LibMapping="clr-namespace:TrackRoamer.Robotics.LibMapping;assembly=TrackRoamer.Robotics.LibMapping.Y2011.M06"
+        xmlns:my="clr-namespace:TrackRoamer.Robotics.LibGuiWpf"
+        Title="MapWindow" 
+        Width="1000"
+        Height="880" SizeChanged="Window_SizeChanged" StateChanged="Window_StateChanged">
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="dataStrategy"
+            MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="LibMapping:RobotStrategyType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="dataTactics"
+            MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="LibMapping:RobotTacticsType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+
+    <Grid Name="mainPanel">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="145" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!-- warning: the mapperViewControl1 must preceed toolPanels in XAML, or there will be exception thrown due to uninitialized mapperViewControl1
+             See Window_SizeChanged() for keeping aspect while resizing -->
+        <my:MapperViewControl x:Name="mapperViewControl1" Loaded="mapperViewControl1_Loaded" Grid.Column="1" />
+        
+        <StackPanel Name="toolPanel2" Orientation="Vertical" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Bearing:" Name="label1" />
+                <TextBox Name="bearingTextBox" Width="45" VerticalAlignment="Center" Text="0" KeyUp="bearingTextBox_KeyUp" />
+            </StackPanel>
+            <CheckBox Name="manualControlCheckBox" Margin="5,0,0,0" Checked="manualControlCheckBox_CheckedUnchecked" Unchecked="manualControlCheckBox_CheckedUnchecked" FlowDirection="RightToLeft" HorizontalAlignment="Left">:Manual Control</CheckBox>
+            <StackPanel Orientation="Horizontal">
+                <Button Name="manualControlButtonTurn" Width="45" Margin="20,0,0,0" VerticalAlignment="Center" Click="manualControlButtonTurn_Click">Turn</Button>
+                <Button Name="manualControlButtonStop" Width="45" Margin="15,0,0,0" VerticalAlignment="Center" Background="Orange" Click="manualControlButtonStop_Click">Stop</Button>
+            </StackPanel>
+            <Label Content="Strategy:" Name="labelS" Margin="0,20,00,0" FontWeight="Bold" />
+            <ComboBox Name="comboBoxStrategy" VerticalAlignment="Center" Width="142" ItemsSource="{Binding Source={StaticResource dataStrategy}}" SelectionChanged="comboBoxStrategy_SelectionChanged" SelectedIndex="0" />
+            <Label Content="Tactics:" Name="labelT" />
+            <ComboBox Name="comboBoxTactics"  VerticalAlignment="Center" Width="142" ItemsSource="{Binding Source={StaticResource dataTactics}}" SelectedIndex="0" IsEnabled="False" />
+            <Label Content="Options:" Name="labelO" Margin="20,20,00,0" FontWeight="Bold" />
+            <CheckBox Name="doLostTargetRoutineCheckBox" Margin="0,0,10,0" VerticalAlignment="Center" Checked="doLostTargetRoutineCheckBox_CheckedUnchecked" Unchecked="doLostTargetRoutineCheckBox_CheckedUnchecked" FlowDirection="RightToLeft">:Search if Lost</CheckBox>
+            <CheckBox Name="doPhotosCheckBox" Margin="0,0,10,0" VerticalAlignment="Center" Checked="doPhotosCheckBox_CheckedUnchecked" Unchecked="doPhotosCheckBox_CheckedUnchecked" FlowDirection="RightToLeft">:Take Photos</CheckBox>
+            <CheckBox Name="doVicinityPlanningCheckBox" Margin="0,0,10,0" VerticalAlignment="Center" Checked="doVicinityPlanningCheckBox_CheckedUnchecked" Unchecked="doVicinityPlanningCheckBox_CheckedUnchecked" FlowDirection="RightToLeft">:Plan Near Path</CheckBox>
+            <Label Content="Ignore:" Name="labelI" Margin="20,20,00,0" FontWeight="Bold" />
+            <CheckBox Name="ignoreGpsCheckBox" Margin="0,0,10,0" VerticalAlignment="Center" Checked="ignoreGpsCheckBox_CheckedUnchecked" Unchecked="ignoreGpsCheckBox_CheckedUnchecked" FlowDirection="RightToLeft">:GPS</CheckBox>
+            <CheckBox Name="ignoreAhrsCheckBox" Margin="0,0,10,0" VerticalAlignment="Center" Checked="ignoreAhrsCheckBox_CheckedUnchecked" Unchecked="ignoreAhrsCheckBox_CheckedUnchecked" FlowDirection="RightToLeft">:AHRS</CheckBox>
+            <CheckBox Name="ignoreLaserCheckBox" Margin="0,0,10,0" VerticalAlignment="Center" Checked="ignoreLaserCheckBox_CheckedUnchecked" Unchecked="ignoreLaserCheckBox_CheckedUnchecked" FlowDirection="RightToLeft" Background="Yellow">:Laser/Sonar</CheckBox>
+            <CheckBox Name="ignoreProximityCheckBox" Margin="0,0,10,0" VerticalAlignment="Center" Checked="ignoreProximityCheckBox_CheckedUnchecked" Unchecked="ignoreProximityCheckBox_CheckedUnchecked" FlowDirection="RightToLeft" Background="Cyan">:IR Proximity</CheckBox>
+            <CheckBox Name="ignoreParkingSensorCheckBox" Margin="0,0,10,0" VerticalAlignment="Center" Checked="ignoreParkingSensorCheckBox_CheckedUnchecked" Unchecked="ignoreParkingSensorCheckBox_CheckedUnchecked" FlowDirection="RightToLeft" Background="Orange">:Parking Sensor</CheckBox>
+            <CheckBox Name="ignoreKinectSoundsCheckBox" Margin="0,0,10,0" VerticalAlignment="Center" Checked="ignoreKinectSoundsCheckBox_CheckedUnchecked" Unchecked="ignoreKinectSoundsCheckBox_CheckedUnchecked" FlowDirection="RightToLeft">:Sounds</CheckBox>
+            <CheckBox Name="ignoreRedShirtCheckBox" Margin="0,0,10,0" VerticalAlignment="Center" Checked="ignoreRedShirtCheckBox_CheckedUnchecked" Unchecked="ignoreRedShirtCheckBox_CheckedUnchecked" FlowDirection="RightToLeft">:Red Shirt</CheckBox>
+            <CheckBox Name="ignoreKinectSkeletonsCheckBox" Margin="0,0,10,0" VerticalAlignment="Center" Checked="ignoreKinectSkeletonsCheckBox_CheckedUnchecked" Unchecked="ignoreKinectSkeletonsCheckBox_CheckedUnchecked" FlowDirection="RightToLeft">:Skeletons</CheckBox>
+        </StackPanel>
+    </Grid>
+</Window>

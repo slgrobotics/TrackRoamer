@@ -1,0 +1,100 @@
+﻿<Window x:Class="WpfHeadTurnTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Loaded="Window_Loaded" Closed="Window_Closed"
+        WindowStartupLocation="CenterScreen"
+        xmlns:chart="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        Title="MainWindow" Height="646" Width="1240" MinWidth="1000" MinHeight="500">
+    <Window.Resources>
+        <Style x:Key="DataPointStyleWithNoPointsR" TargetType="chart:LineDataPoint">
+            <Setter Property="Background" Value="Red" />
+            <Setter Property="Opacity" Value="0" />
+        </Style>
+        <Style x:Key="DataPointStyleWithNoPointsG" TargetType="chart:LineDataPoint">
+            <Setter Property="Background" Value="Green" />
+            <Setter Property="Opacity" Value="0" />
+        </Style>
+        <Style x:Key="DataPointStyleWithNoPointsB" TargetType="chart:LineDataPoint">
+            <Setter Property="Background" Value="Blue" />
+            <Setter Property="Opacity" Value="0" />
+        </Style>
+    </Window.Resources>
+
+    <DockPanel LastChildFill="True">
+        <DockPanel.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="LightGray" Offset="0"/>
+                    <GradientStop Color="LightBlue" Offset="1"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </DockPanel.Background>
+        <GroupBox Header="Kinect Pan Controls" Height="250" Margin="10,10,0,0" Name="groupBox1" VerticalAlignment="Top" DockPanel.Dock="Top">
+            <Grid>
+                <Label Content="" HorizontalAlignment="Left" Margin="616,10,0,10" Name="pmValuesLabel" Width="127" />
+                <ScrollBar Height="21" LargeChange="100" Margin="20,29,0,0" Maximum="2250" MinWidth="100" Minimum="750" x:Name="panKinectTargetPosScrollBar" Orientation="Horizontal" SmallChange="1" Value="1500" VerticalAlignment="Top" ValueChanged="panKinectTargetPosScrollBar_ValueChanged" HorizontalAlignment="Left" Width="500" />
+                <ScrollBar Height="21" LargeChange="100" Margin="20,78,0,0" Maximum="2250" MinWidth="100" Minimum="750" x:Name="panKinectServoPosBar" Orientation="Horizontal" SmallChange="1" Value="1500" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" />
+                <ScrollBar Height="21" LargeChange="100" Margin="20,128,0,0" Maximum="2250" MinWidth="100" Minimum="750" x:Name="panKinectMeasuredPosScrollBar" Orientation="Horizontal" SmallChange="1" Value="1500" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" />
+                <Label Content="Move slider to set target position:" HorizontalAlignment="Left" Margin="20,3,0,0" VerticalAlignment="Top"/>
+                <Label Content="Actuator (Servo) input:" HorizontalAlignment="Left" Margin="20,54,0,0" VerticalAlignment="Top"/>
+                <Label Content="Measured head position (feedback from potentiometer):" HorizontalAlignment="Left" Margin="20,102,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="TargetPosLabel" Content="TargetPos" HorizontalAlignment="Left" Margin="530,26,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="ServoPosLabel" Content="ServoPos" HorizontalAlignment="Left" Margin="530,75,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="MeasuredPosLabel" Content="MeasuredPos" HorizontalAlignment="Left" Margin="530,123,0,0" VerticalAlignment="Top"/>
+                <GroupBox Header="PID" Width="256" HorizontalAlignment="Right" Margin="0,5,10,10" >
+                    <Grid>
+                        <Label Content="K proportional:" Height="28" HorizontalAlignment="Left" Margin="10,4,0,0" Name="label5" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="107,6,0,0" Name="textBoxKp" VerticalAlignment="Top" Width="120" />
+                        <Label Content="K derivative:" Height="28" HorizontalAlignment="Left" Margin="10,66,0,0" Name="label6" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="107,69,0,0" Name="textBoxKd" VerticalAlignment="Top" Width="120" />
+                        <Label Content="K integral:" Height="28" HorizontalAlignment="Left" Margin="10,36,0,0" Name="label7" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="107,39,0,0" Name="textBoxKi" VerticalAlignment="Top" Width="120" />
+                        <Label Content="Max:" Height="28" HorizontalAlignment="Left" Margin="57,97,0,0" Name="label13" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="107,99,0,0" Name="textBoxMax" VerticalAlignment="Top" Width="120" />
+                        <Label Content="Min:" Height="28" HorizontalAlignment="Left" Margin="61,127,0,0" Name="label14" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="107,129,0,0" Name="textBoxMin" VerticalAlignment="Top" Width="120" />
+                        <CheckBox x:Name="UsePIDCheckBox" Content="Use PID" HorizontalAlignment="Left" Margin="15,165,0,0" VerticalAlignment="Top" RenderTransformOrigin="-6.515,-1.375"/>
+                        <Button x:Name="ApplyPidButton" Content="Apply PID" HorizontalAlignment="Left" Margin="152,162,0,0" VerticalAlignment="Top" Width="75" Click="ApplyPidButton_Click"/>
+                    </Grid>
+                </GroupBox>
+                <Button x:Name="CalibrateKinectPanFeedbackButton" Content="Calibrate Kinect Pan Feedback" HorizontalAlignment="Left" Margin="20,182,0,0" VerticalAlignment="Top" Width="202" Click="CalibrateKinectPanFeedbackButton_Click"/>
+                <TextBox x:Name="CalibratedValuesTextBox" Text="must calibrate to see values" HorizontalAlignment="Left" Margin="239,181,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="gameOnCheckBox" Content="Track Skeleton" HorizontalAlignment="Left" Margin="426,9,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
+        <DockPanel DockPanel.Dock="Bottom">
+            <DockPanel>
+                <TextBox FontSize="16" Focusable="False" BorderThickness="0" Text="Color Video Stream" HorizontalAlignment="Center" Name="VideoCaption" DockPanel.Dock="Top" />
+                <Image Name="videoImage" Margin="2 0 2 2"/>
+            </DockPanel>
+            <chart:Chart x:Name="chart">
+                <chart:Chart.Axes>
+                    <chart:LinearAxis Orientation="Y" ShowGridLines="False"  Minimum="1000" Maximum="2000" />
+                </chart:Chart.Axes>
+                <chart:Chart.Series>
+                    <chart:LineSeries Name="ChartSetpoint"
+                                                Title="Setpoint"  
+                                                DependentValuePath="Value" 
+                                                IndependentValuePath="Key"
+                                                ItemsSource="{Binding ItemsSetpoint}"
+                                                DataPointStyle="{StaticResource DataPointStyleWithNoPointsR}"
+                                                IsSelectionEnabled="True"/>
+                    <chart:LineSeries Name="ChartServo"
+                                                Title="Servo"  
+                                                DependentValuePath="Value" 
+                                                IndependentValuePath="Key"
+                                                ItemsSource="{Binding ItemsServo}"
+                                                DataPointStyle="{StaticResource DataPointStyleWithNoPointsG}"
+                                                IsSelectionEnabled="True"/>
+                    <chart:LineSeries Name="ChartMeasured" 
+                                                Title="Measured"  
+                                                DependentValuePath="Value" 
+                                                IndependentValuePath="Key"
+                                                ItemsSource="{Binding ItemsMeasured}"
+                                                DataPointStyle="{StaticResource DataPointStyleWithNoPointsB}"
+                                                IsSelectionEnabled="True" />
+                </chart:Chart.Series>
+            </chart:Chart>
+        </DockPanel>
+    </DockPanel>
+</Window>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RobotDashboardState xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:d="http://schemas.microsoft.com/xw/2004/10/dssp.html" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns="http://schemas.microsoft.com/robotics/2011/07/robotdashboard.user.html">
+  <TiltAngle>0</TiltAngle>
+  <Options>
+    <WindowStartX>10</WindowStartX>
+    <WindowStartY>10</WindowStartY>
+    <DepthcamWindowStartX>460</DepthcamWindowStartX>
+    <DepthcamWindowStartY>10</DepthcamWindowStartY>
+    <DepthcamWindowWidth>360</DepthcamWindowWidth>
+    <DepthcamWindowHeight>300</DepthcamWindowHeight>
+    <WebcamWindowStartX>460</WebcamWindowStartX>
+    <WebcamWindowStartY>320</WebcamWindowStartY>
+    <WebcamWindowWidth>360</WebcamWindowWidth>
+    <WebcamWindowHeight>300</WebcamWindowHeight>
+    <DeadZoneX>150</DeadZoneX>
+    <DeadZoneY>150</DeadZoneY>
+    <TranslateScaleFactor>0.7</TranslateScaleFactor>
+    <RotateScaleFactor>0.4</RotateScaleFactor>
+    <CameraInterval>250</CameraInterval>
+  </Options>
+</RobotDashboardState>

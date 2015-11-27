@@ -1,0 +1,20 @@
+[Profile]
+Format=20
+Title="RobotControl"
+Author=Owner
+Revision=1
+Date=2007.03.11
+Brand=Custom User Profile
+Executable=RoboteqControllerTest.exe
+[Signature]
+App Path="","",7143525
+[Command]
+0="Mouse Left Button",*B601
+1="Mouse Middle Button",*B602
+2="Mouse Right Button",*B603
+[Device Special Options]
+Device Count=1
+[Device Number 1]
+Device Model=28
+WFFMSettings=1
+WFFMMode=1

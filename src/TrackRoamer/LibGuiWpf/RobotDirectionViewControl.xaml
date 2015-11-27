@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="TrackRoamer.Robotics.LibGuiWpf.RobotDirectionViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="260" d:DesignWidth="220" MinHeight="260" MinWidth="220">
+    <UserControl.Resources>
+        <Pen x:Key="BlackPen1" Thickness="1" Brush="Black"></Pen>
+        <Pen x:Key="RedPen1" Thickness="1" Brush="Red"></Pen>
+        <DataTemplate x:Key="TemplateXaml">
+            <!-- DirectionPointer -->
+            <Path Stroke="Red" StrokeThickness="2" 
+                              Width="100" 
+                              Height="20"
+                              Data="M1,50 L100,1 L100,100 z" Stretch="Fill"
+                  >
+                <Path.Fill>
+                    <SolidColorBrush Color="Yellow" />
+                </Path.Fill>
+            </Path>
+        </DataTemplate>
+    </UserControl.Resources>
+    <StackPanel>
+        <GroupBox Header="Direction" Name="groupBox1" Margin="5,0,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*" MinHeight="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Name="grid1" Grid.Row="1">
+                    <Image>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <GeometryDrawing Pen="{StaticResource BlackPen1}" >
+                                        <GeometryDrawing.Geometry>
+                                            <GeometryGroup>
+                                                <EllipseGeometry RadiusX="50" RadiusY="50"></EllipseGeometry>
+                                                <LineGeometry StartPoint="-50 0" EndPoint="50 0"></LineGeometry>
+                                                <LineGeometry StartPoint="0 -50" EndPoint="0 50"></LineGeometry>
+                                            </GeometryGroup>
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                    <!-- Image for the dial -->
+                    <Image Margin="-10,0,171,0" Width="32" Panel.ZIndex="999">
+                        <Image.RenderTransform>
+                            <TranslateTransform X="90"/>
+                        </Image.RenderTransform>
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <GeometryDrawing Brush="Yellow" Pen="{StaticResource RedPen1}" >
+                                        <GeometryDrawing.Geometry>
+                                            <EllipseGeometry RadiusX="10" RadiusY="10"></EllipseGeometry>
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+                    <Label Content="S" FontWeight="ExtraBold" Height="28" HorizontalAlignment="Left" Margin="101,175,0,0" Name="label2" VerticalAlignment="Top" />
+                    <Label Content="E" FontWeight="ExtraBold" Height="28" HorizontalAlignment="Left" Margin="184,98,0,0" Name="label3" VerticalAlignment="Top" />
+                    <Label Content="W" FontWeight="ExtraBold" Height="28" HorizontalAlignment="Left" Margin="0,98,0,0" Name="label4" VerticalAlignment="Top" />
+                    <Label Content="heading" Height="35" HorizontalAlignment="Left" Margin="0,-13,0,0" Name="headingLabel" VerticalAlignment="Top" FontSize="16" FontWeight="ExtraBold" Foreground="Red" Background="Yellow" />
+                    <Label Content="bearing" Height="28" HorizontalAlignment="Right" Margin="0,-10,4,0" Name="bearingLabel" VerticalAlignment="Top" FontWeight="ExtraBold" Foreground="Green" />
+                </Grid>
+                <Label Content="N" Grid.RowSpan="2" Height="28" HorizontalAlignment="Left" Margin="91,13,0,0" Name="label1" VerticalAlignment="Top" FontWeight="ExtraBold" />
+                <Label Content="True North Heading" Height="22" HorizontalAlignment="Left" Name="label5" VerticalAlignment="Top" FontSize="9" />
+                <Label Content="bearing to target" Height="22" HorizontalAlignment="Left" Name="label6" VerticalAlignment="Top" FontSize="9" Margin="126,0,0,0" />
+            </Grid>
+        </GroupBox>
+    </StackPanel>
+</UserControl>

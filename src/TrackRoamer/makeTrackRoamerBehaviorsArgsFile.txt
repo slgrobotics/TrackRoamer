@@ -1,0 +1,20 @@
+# feed it to dssnewservice @<file> --    dssnewservice @makeTrackRoamerBehaviorsArgsFile.txt
+
+# C:\>echo %PATH%
+# C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\;
+# C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\Bin;
+# C:\WINDOWS\system32;
+# C:\WINDOWS;C:\WINDOWS\System32\Wbem;
+# c:\Program Files\Microsoft SQL Server\90\Tools\binn\;
+# C:\Microsoft Robotics Studio (1.0)\bin\
+
+-dir:TrackRoamerBehaviors
+-service:TrackRoamerBehaviors
+-assemblyname:TrackRoamerBehaviors
+-namespace:TrackRoamer.Robotics.Services.TrackRoamerBehaviors
+-year:2007
+-month:04
+-documentation+
+-verbosity:detailed
+-referencepath:"C:\Microsoft Robotics Studio (1.0)\bin"
+

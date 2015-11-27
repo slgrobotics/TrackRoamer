@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <script type="text/javascript">
+      function timedRefresh(timeoutPeriod) {
+        setTimeout(doRefresh,timeoutPeriod);
+      }
+      function doRefresh()
+      {
+        location.reload(true);
+      }
+    </script>
+  </head>
+  <body onload="JavaScript:timedRefresh(1000);">
+    <table>
+      <tr>
+        <td valign="top"><iframe src="http://localhost:50000/trackroamerbehaviors/north" width="600" height="300" frameborder="0" scrolling="no"></iframe>
+        </td>
+        <td valign="top"><iframe src="http://localhost:50000/trackroamerbehaviors/history" width="400" height="500" frameborder="0" scrolling="auto"></iframe>
+        </td>
+      </tr>
+    </table>
+    http://localhost:50000/trackroamerbehaviors/north
+    
+    <!--a href="http://localhost:50000/sicklrf/top" target="_blank"><img src="http://localhost:50000/sicklrf/top" alt="top"/></a> <a href="http://localhost:50000/sicklrf/top" target="single">top</a><br/><br/>
+      <a href="http://localhost:50000/sicklrf/cylinder" target="_blank"><img src="http://localhost:50000/sicklrf/cylinder" alt="cylinder"/></a> <a href="http://localhost:50000/sicklrf/cylinder" target="single">cylinder</a><br/>
+      
+      <a href="http://localhost:50000/trackroamerbehaviors/south" target="single">south</a><br/>
+      <a href="http://localhost:50000/trackroamerbehaviors/south" target="_blank"><img src="http://localhost:50000/trackroamerbehaviors/south" alt="south"/></a><br/>
+
+      <a href="http://localhost:50000/trackroamerbehaviors/status" target="single">status</a><br/>
+      <a href="http://localhost:50000/trackroamerbehaviors/status" target="_blank"><img src="http://localhost:50000/trackroamerbehaviors/status" alt="status"/></a><br/ -->
+
+  </body>
+</html>

@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+<!--This file was created with the Microsoft Visual Programming Language.-->
+<Manifest xmlns:trackroamerdrive="http://schemas.trackroamer.com/robotics/2011/02/trackroamerdrive.html"
+          xmlns:obstacleavoidancedrive="http://schemas.microsoft.com/2011/07/obstacleavoidancedrive.user.html"
+          xmlns:robotdashboard="http://schemas.microsoft.com/robotics/2011/07/robotdashboard.user.html"
+          xmlns:trackroamerencoder="http://schemas.trackroamer.com/robotics/2009/04/trackroamerencoder.html"
+          xmlns:trackroamerbrickproximityboard="http://schemas.trackroamer.com/robotics/2011/01/trackroamerbrickproximityboard.html"
+          xmlns:trackroamerbot="http://schemas.trackroamer.com/robotics/2009/04/trackroamerbot.html"
+          xmlns:this="urn:uuid:616ed3c3-bf6e-4935-9bea-77447db36cb5"
+          xmlns:dssp="http://schemas.microsoft.com/xw/2004/10/dssp.html"
+          xmlns:trackroamermotor="http://schemas.trackroamer.com/robotics/2009/04/trackroamermotor.html"
+          xmlns:trackroamerrp2011abstractionlayer="http://schemas.trackroamer.com/robotics/2011/12/trackroamerrp2011abstractionlayer.html"
+          xmlns:service="drive" xmlns="http://schemas.microsoft.com/xw/2004/10/manifest.html">
+  <CreateServiceList>
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/robotics/2011/07/robotdashboard.user.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/07/robotdashboard.user.html</dssp:Contract>
+          <dssp:Service>ObstacleAvoidanceDrive.RobotDashboard.user.config.xml</dssp:Service>
+          <dssp:PartnerList />
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/drive.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>robotdashboard:Drive</dssp:Name>
+          <dssp:ServiceName>this:ObstacleAvoidanceDrive</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/01/depthcamsensor.user.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>robotdashboard:DepthCam</dssp:Name>
+          <dssp:ServiceName>this:UserKinect</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/01/webcamsensor.user.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>robotdashboard:WebCam</dssp:Name>
+          <dssp:ServiceName>this:UserKinect</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/10/infraredsensorarray.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>robotdashboard:IRSensorArray</dssp:Name>
+          <dssp:ServiceName>this:TrackroamerRP2011AbstractionLayer</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/09/sonarsensorarray.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>robotdashboard:SonarSensorArray</dssp:Name>
+          <dssp:ServiceName>this:TrackroamerRP2011AbstractionLayer</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/10/pantilt.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>robotdashboard:Pan_x002F_Tilt</dssp:Name>
+          <dssp:ServiceName>this:UserKinect</dssp:ServiceName>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>this:RobotDashboard</Name>
+    </ServiceRecordType>
+    
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2011/12/trackroamerrp2011abstractionlayer.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.trackroamer.com/robotics/2011/01/trackroamerbrickproximityboard.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerrp2011abstractionlayer:TrackRoamerBrickProximityBoardService</dssp:Name>
+          <dssp:ServiceName>this:TrackRoamerBrickProximityBoard</dssp:ServiceName>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>this:TrackroamerRP2011AbstractionLayer</Name>
+    </ServiceRecordType>
+    
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2011/01/trackroamerbrickproximityboard.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:TrackRoamerBrickProximityBoard</Name>
+    </ServiceRecordType>
+    
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/robotics/2011/08/kinect.user.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:UserKinect</Name>
+    </ServiceRecordType>
+    
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerbot.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerbot.html</dssp:Contract>
+          <dssp:Service>trackroamer.trackroamerbot.bot.config.xml</dssp:Service>
+          <dssp:PartnerList />
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>this:TrackRoamerBot</Name>
+    </ServiceRecordType>
+    
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2011/02/trackroamerdrive.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.trackroamer.com/robotics/2011/02/trackroamerdrive.html</dssp:Contract>
+          <dssp:Service>trackroamer.trackroamerbot.drive.config.xml</dssp:Service>
+          <dssp:PartnerList />
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/motor.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerdrive:LeftMotor</dssp:Name>
+          <dssp:ServiceName>this:LeftMotor</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/motor.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerdrive:RightMotor</dssp:Name>
+          <dssp:ServiceName>this:RightMotor</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/encoder.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerdrive:LeftEncoder</dssp:Name>
+          <dssp:ServiceName>this:LeftEncoder</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/encoder.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>trackroamerdrive:RightEncoder</dssp:Name>
+          <dssp:ServiceName>this:RightEncoder</dssp:ServiceName>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>this:TrackRoamerDriveService</Name>
+    </ServiceRecordType>
+    
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamermotor.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:LeftMotor</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamermotor.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:RightMotor</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerencoder.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:LeftEncoder</Name>
+    </ServiceRecordType>
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.trackroamer.com/robotics/2009/04/trackroamerencoder.html</dssp:Contract>
+      <dssp:PartnerList />
+      <Name>this:RightEncoder</Name>
+    </ServiceRecordType>
+
+    <ServiceRecordType>
+      <dssp:Contract>http://schemas.microsoft.com/2011/07/obstacleavoidancedrive.user.html</dssp:Contract>
+      <dssp:PartnerList>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/2011/07/obstacleavoidancedrive.user.html</dssp:Contract>
+          <dssp:Service>obstacleavoidancedrive.user.config.xml</dssp:Service>
+          <dssp:PartnerList />
+          <dssp:Name>dssp:StateService</dssp:Name>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2006/05/drive.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>obstacleavoidancedrive:Drive</dssp:Name>
+          <dssp:ServiceName>this:TrackRoamerDriveService</dssp:ServiceName>
+        </dssp:Partner>
+         <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/01/depthcamsensor.user.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>obstacleavoidancedrive:DepthCamera</dssp:Name>
+          <dssp:ServiceName>this:UserKinect</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/10/infraredsensorarray.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>obstacleavoidancedrive:InfraredSensorArray</dssp:Name>
+          <dssp:ServiceName>this:TrackroamerRP2011AbstractionLayer</dssp:ServiceName>
+        </dssp:Partner>
+        <dssp:Partner>
+          <dssp:Contract>http://schemas.microsoft.com/robotics/2011/09/sonarsensorarray.html</dssp:Contract>
+          <dssp:PartnerList />
+          <dssp:Name>obstacleavoidancedrive:SonarSensorArray</dssp:Name>
+          <dssp:ServiceName>this:TrackroamerRP2011AbstractionLayer</dssp:ServiceName>
+        </dssp:Partner>
+      </dssp:PartnerList>
+      <Name>this:ObstacleAvoidanceDrive</Name>
+    </ServiceRecordType>
+
+  </CreateServiceList>
+</Manifest>

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DriveDifferentialTwoWheelState xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:d="http://schemas.microsoft.com/xw/2004/10/dssp.html" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns="http://schemas.microsoft.com/robotics/2006/05/drive.html">
+  <TimeStamp>2012-01-21T12:35:24.6946267-08:00</TimeStamp>
+  <LeftWheel>
+    <WheelSpeed xmlns="http://schemas.microsoft.com/robotics/2006/05/motor.html">0</WheelSpeed>
+    <MotorState xmlns="http://schemas.microsoft.com/robotics/2006/05/motor.html">
+      <Name>Left Motor</Name>
+      <HardwareIdentifier>1</HardwareIdentifier>
+      <CurrentPower>0</CurrentPower>
+      <PowerScalingFactor>40</PowerScalingFactor>
+      <ReversePolarity>false</ReversePolarity>
+      <Pose>
+        <Position xmlns="http://schemas.microsoft.com/robotics/2006/07/physicalmodel.html">
+          <X>0</X>
+          <Y>0</Y>
+          <Z>0</Z>
+        </Position>
+        <Orientation xmlns="http://schemas.microsoft.com/robotics/2006/07/physicalmodel.html">
+          <X>0</X>
+          <Y>0</Y>
+          <Z>0</Z>
+          <W>0</W>
+        </Orientation>
+      </Pose>
+    </MotorState>
+    <Radius xmlns="http://schemas.microsoft.com/robotics/2006/05/motor.html">0.1805</Radius>
+    <GearRatio xmlns="http://schemas.microsoft.com/robotics/2006/05/motor.html">0.136</GearRatio>
+    <EncoderState xmlns="http://schemas.microsoft.com/robotics/2006/05/motor.html">
+      <TicksSinceReset xmlns="http://schemas.microsoft.com/robotics/2006/05/encoder.html">0</TicksSinceReset>
+      <CurrentAngle xmlns="http://schemas.microsoft.com/robotics/2006/05/encoder.html">0</CurrentAngle>
+      <CurrentReading xmlns="http://schemas.microsoft.com/robotics/2006/05/encoder.html">0</CurrentReading>
+      <TicksPerRevolution xmlns="http://schemas.microsoft.com/robotics/2006/05/encoder.html">2784</TicksPerRevolution>
+      <HardwareIdentifier xmlns="http://schemas.microsoft.com/robotics/2006/05/encoder.html">1</HardwareIdentifier>
+    </EncoderState>
+  </LeftWheel>
+  <RightWheel>
+    <WheelSpeed xmlns="http://schemas.microsoft.com/robotics/2006/05/motor.html">0</WheelSpeed>
+    <MotorState xmlns="http://schemas.microsoft.com/robotics/2006/05/motor.html">
+      <Name>Right Motor</Name>
+      <HardwareIdentifier>2</HardwareIdentifier>
+      <CurrentPower>0</CurrentPower>
+      <PowerScalingFactor>40</PowerScalingFactor>
+      <ReversePolarity>false</ReversePolarity>
+      <Pose>
+        <Position xmlns="http://schemas.microsoft.com/robotics/2006/07/physicalmodel.html">
+          <X>0</X>
+          <Y>0</Y>
+          <Z>0</Z>
+        </Position>
+        <Orientation xmlns="http://schemas.microsoft.com/robotics/2006/07/physicalmodel.html">
+          <X>0</X>
+          <Y>0</Y>
+          <Z>0</Z>
+          <W>0</W>
+        </Orientation>
+      </Pose>
+    </MotorState>
+    <Radius xmlns="http://schemas.microsoft.com/robotics/2006/05/motor.html">0.1805</Radius>
+    <GearRatio xmlns="http://schemas.microsoft.com/robotics/2006/05/motor.html">0.136</GearRatio>
+    <EncoderState xmlns="http://schemas.microsoft.com/robotics/2006/05/motor.html">
+      <TicksSinceReset xmlns="http://schemas.microsoft.com/robotics/2006/05/encoder.html">0</TicksSinceReset>
+      <CurrentAngle xmlns="http://schemas.microsoft.com/robotics/2006/05/encoder.html">0</CurrentAngle>
+      <CurrentReading xmlns="http://schemas.microsoft.com/robotics/2006/05/encoder.html">0</CurrentReading>
+      <TicksPerRevolution xmlns="http://schemas.microsoft.com/robotics/2006/05/encoder.html">2784</TicksPerRevolution>
+      <HardwareIdentifier xmlns="http://schemas.microsoft.com/robotics/2006/05/encoder.html">2</HardwareIdentifier>
+    </EncoderState>
+  </RightWheel>
+  <DistanceBetweenWheels>0.4964</DistanceBetweenWheels>
+  <IsEnabled>true</IsEnabled>
+  <DriveDistanceStage>InitialRequest</DriveDistanceStage>
+  <RotateDegreesStage>InitialRequest</RotateDegreesStage>
+  <DriveState>NotSpecified</DriveState>
+</DriveDifferentialTwoWheelState>

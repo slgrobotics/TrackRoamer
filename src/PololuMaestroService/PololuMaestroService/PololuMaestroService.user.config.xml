@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PololuMaestroServiceState xmlns:s="http://www.w3.org/2003/05/soap-envelope"
+                           xmlns:d="http://schemas.microsoft.com/xw/2004/10/dssp.html"
+                           xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+                           xmlns="http://schemas.trackroamer.com/2012/02/pololumaestroservice.html">
+  <SafePositions>
+    <SafePosition>
+      <channel>4</channel>
+      <positionUs>1000</positionUs>
+    </SafePosition>
+    <SafePosition>
+      <channel>5</channel>
+      <positionUs>1000</positionUs>
+    </SafePosition>
+  </SafePositions>
+</PololuMaestroServiceState>
