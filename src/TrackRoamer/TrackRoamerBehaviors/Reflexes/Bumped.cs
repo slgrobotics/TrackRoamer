@@ -58,6 +58,11 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
             string whatIsBumped;
             int turnFactor; // = btRand.NextDouble() > 0.5d ? 1 : -1;
 
+            if (leftWhiskerPressed && rightWhiskerPressed)
+            {
+                whatIsBumped = "Both whiskers";
+                turnFactor = 0;    // straight back
+            }
             if (leftWhiskerPressed)
             {
                 whatIsBumped = "Left whisker";
@@ -112,19 +117,19 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
                     _state.MovingState = MovingState.BumpedBackingUp;
                     lastBumpedBackingUpStarted = DateTime.Now;
 
-                    LogInfo("TrackRoamerBehaviorsService: Bumped() - " + whatIsBumped + " pressed, backing up by " + (-BackupDistanceMm) + " mm");
+                    int angle = BackupAngleDegrees * turnFactor;
+
+                    Tracer.Trace("TrackRoamerBehaviorsService: Bumped() - " + whatIsBumped + " pressed, backing up by " + (-BackupDistanceMm) + " mm  turning " + angle + " degrees");
 
                     Talker.Say(4, "backing up");
 
                     // only a front bumper is pressed.
                     // move back <BackupDistance> mm;
 
-                    int angle = BackupAngleDegrees * turnFactor;
-
                     TurnAndMoveParameters tamp = new TurnAndMoveParameters()
                     {
                         distance = BackupDistanceMm,
-                        speed = (int)Math.Round(MaximumBackwardVelocityMmSec),
+                        speed = (int)Math.Round(ModerateBackwardVelocityMmSec),
                         rotatePower = ModerateTurnPower,
                         rotateAngle = angle
                     };

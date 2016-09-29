@@ -53,7 +53,7 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
 		/// <summary>
 		/// Amount to backup when hitting an obstacle.
 		/// </summary>
-		const int BackupDistanceMm = 300;       // mm
+		const int BackupDistanceMm = 100;       // mm
 		const int BackupAngleDegrees = 45;      // degrees, will be random left or right; if 0 not turning after backup
 
 		/// <summary>

@@ -796,15 +796,18 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBrickPower
                 double? leftSpeed = _state.MotorSpeed.LeftSpeed;
                 double? rightSpeed = _state.MotorSpeed.RightSpeed;
 
+                Tracer.Trace("IP: TrackRoamerBrickPowerService:UpdateMotorSpeedHandler - speed  L: " + leftSpeed + "    R: " + rightSpeed);
+
                 // it will take time for upper layers to react on whiskers. We want to have some protection here, to avoid damage.
+                // Note: while moving forward the speeds are negative.
                 // cannot move forward if whiskers are pressed; replace it with backwards movement at half speed though:
-                if (leftSpeed  > 0 && _state.Whiskers.FrontWhiskerLeft.GetValueOrDefault())
+                if (leftSpeed  < 0 && _state.Whiskers.FrontWhiskerLeft.GetValueOrDefault())
                 {
                     Tracer.Trace("Warning: TrackRoamerBrickPowerService:UpdateMotorSpeedHandler - left whisker pressed, speed " + leftSpeed + " reversed");
                     leftSpeed  = -leftSpeed / 2;
                 }
 
-                if (rightSpeed > 0 && _state.Whiskers.FrontWhiskerRight.GetValueOrDefault())
+                if (rightSpeed < 0 && _state.Whiskers.FrontWhiskerRight.GetValueOrDefault())
                 {
                     Tracer.Trace("Warning: TrackRoamerBrickPowerService:UpdateMotorSpeedHandler - right whisker pressed, speed " + rightSpeed + " reversed");
                     rightSpeed = -rightSpeed / 2;

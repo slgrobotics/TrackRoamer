@@ -462,7 +462,7 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
 
                 return; // may be just temporary loss of red shirt, wait a little before switching to sound
             }
-            else if(!_mapperVicinity.robotState.ignoreKinectSounds)
+            else if(!haveSkeleton && !_mapperVicinity.robotState.ignoreKinectSounds)
             {
                 // we let voice recognizer have control for several seconds, if we can't track skeleton or red shirt anyway.
                 if ((Now - lastVoiceLocalized).TotalSeconds > 5.0d)

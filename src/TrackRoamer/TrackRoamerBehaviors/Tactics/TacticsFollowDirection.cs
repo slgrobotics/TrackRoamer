@@ -50,7 +50,12 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
             Direction curDir = null;
             //bool performedAvoidCollision = false;
 
-            //if (_mapperVicinity.robotState.doVicinityPlanning && FollowDirectionMaxVelocityMmSec > 0.01d)
+            if (_state.MovingState == MovingState.BumpedBackingUp)
+            {
+                Tracer.Trace("TacticsFollowDirection waiting MovingState " + _state.MovingState + " to finish");
+                return;
+            }
+            //else if (_mapperVicinity.robotState.doVicinityPlanning && FollowDirectionMaxVelocityMmSec > 0.01d)
             //{
             //    if (_currentRoutePlan != null && _currentRoutePlan.isGoodPlan)
             //    {
