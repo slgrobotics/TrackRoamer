@@ -79,6 +79,8 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
 
         private int KinectLoopWaitIntervalMs = 500;     // time to wait in the Kinect frames sampling loop when no sampling is enabled.
 
+        private bool useKinectNykoGlasses = true;
+
         /// <summary>
         /// Used to guage frequency of reading the state (which is much lower than that of reading frames)
         /// </summary>
@@ -124,7 +126,7 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
         /// <returns>Iterator</returns>
         private IEnumerator<ITask> InitializeKinectUI()
         {
-            this.frameProcessor = new FramePreProcessor(this.kinectPort, this._state);
+            this.frameProcessor = new FramePreProcessor(this.kinectPort, this._state, this.useKinectNykoGlasses);
 
             var runWindow = this.wpfServicePort.RunWindow(() => new KinectUI(this));
             yield return (Choice)runWindow;

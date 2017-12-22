@@ -37,10 +37,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UsbWrapper">
+    <Reference Include="UsbWrapper, Version=1.5.0.0, Culture=neutral, PublicKeyToken=35297922704b28cd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Usc\bin\Debug\UsbWrapper.dll</HintPath>
     </Reference>
-    <Reference Include="Usc">
+    <Reference Include="Usc, Version=1.3.0.0, Culture=neutral, PublicKeyToken=35297922704b28cd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Usc\bin\Debug\Usc.dll</HintPath>
     </Reference>
   </ItemGroup>

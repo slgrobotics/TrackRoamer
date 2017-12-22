@@ -99,14 +99,14 @@ namespace Trackroamer.Library.LibArduinoComm
                                         string toWrite = toArduino.ToString();
                                         Debug.WriteLine("========> " + toWrite);
                                         _serialPort.WriteLine(toWrite);
-                                        Thread.Sleep(10);
+                                        Thread.Sleep(1);
                                         needToSleep = false;
                                     }
                                 }
 
                                 if(needToSleep)
                                 {
-                                    Thread.Sleep(20);
+                                    Thread.Sleep(2);
                                 }
 
                             }

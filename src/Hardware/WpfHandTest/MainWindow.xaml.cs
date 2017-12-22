@@ -27,13 +27,25 @@ namespace WpfHandTest
 
         IBrickConnector brickConnector;
 
-        private static double[] SafePostures = new double[] { 1.0d, -25.0d, 25.0d, -28.0d, 1.0d, -29.0d, -29.0d, -29.0d, 1.0d };
+        private static double?[] SafePosture = new double?[] { 1.0d, -25.0d, 25.0d, -28.0d, 1.0d, 1.0d, 1.0d, 1.0d, 1.0d };
 
-        private static double[] ZeroPostures = new double[] { 1.0d, 1.0d, 1.0d, 1.0d, 1.0d, 1.0d, 1.0d, 1.0d, 1.0d };   // can't have 0
+        private static double?[] ZeroPosture = new double?[] { 1.0d, 1.0d, 1.0d, 1.0d, 1.0d, 1.0d, 1.0d, 1.0d, 1.0d };   // can't have 0
 
-        private static double[] HandUpPostures = new double[] { 1.0d, 29.0d, -29.0d, 29.0d, 1.0d, -29.0d, -29.0d, -29.0d, -29.0d };
+        private static double?[] HandUpPosture = new double?[] { 1.0d, 29.0d, -29.0d, 29.0d, null, null, null, null, -29.0d };
 
-        private static double[] HandDownPostures = new double[] { 1.0d, -29.0d, 29.0d, 29.0d, 1.0d, -29.0d, -29.0d, -29.0d, 29.0d };
+        private static double?[] HandDownPosture = new double?[] { 1.0d, -29.0d, 29.0d, 29.0d, null, null, null, null, 29.0d };
+
+        private static double?[] HandForwardPosture = new double?[] { 19d, -1.0d, 1.0d, 20.0d, null, null, null, null, 36.0d };
+
+        private static double?[] HandChestPosture = new double?[] { 19d, -1.0d, -3.0d, -22.0d, null, null, null, null, 36.0d };
+
+        private static double?[] HandForwardGrabPreparePosture = new double?[] { -28d, -14.0d, 1.0d, 30.0d, 60, -60, -60, -60, 28.0d };
+
+        private static double?[] HandForwardGrabPosture = new double?[] { -28d, -14.0d, 1.0d, 30.0d, -90.0d, 60.0d, 60.0d, 60.0d, 28.0d };
+
+        private static double?[] GrabPosture = new double?[] { null, null, null, null, -90.0d, 60.0d, 60.0d, 60.0d, null };
+
+        private static double?[] GrabReleasePosture = new double?[] { null, null, null, null, 60, -60, -60, -60, null };
 
         #region MainWindow lifecycle
 
@@ -54,10 +66,10 @@ namespace WpfHandTest
         private void OpenBrickConnector()
         {
             //brickConnector.Open("COM6", 115200);    // hand
-            brickConnector.Open("COM5", 115200);  // shoulder
+            brickConnector.Open("COM11", 115200);  // shoulder
         }
 
-        private void Window_Loaded(object sender, EventArgs e)
+        private async void Window_Loaded(object sender, EventArgs e)
         {
             // UI is up at this moment.
 
@@ -65,7 +77,7 @@ namespace WpfHandTest
 
             OpenBrickConnector();
 
-            AssumePostureScrollbars(SafePostures);
+            await AssumePostureScrollbars(SafePosture);
 
             speak("Ready for action!");
         }
@@ -74,7 +86,7 @@ namespace WpfHandTest
         {
             Debug.WriteLine("IP: MainWindow_Closing");
 
-            SafePosture();
+            AssumeSafePosture();
 
             brickConnector.Close();
 
@@ -89,42 +101,84 @@ namespace WpfHandTest
 
         #region Helpers
 
-        void SafePosture()
+        /// <summary>
+        /// direct command, not via scrollbars
+        /// </summary>
+        void AssumeSafePosture()
         {
-            AssumePosture(SafePostures);
+            AssumePosture(SafePosture);
         }
 
         /// <summary>
+        /// direct command, not via scrollbars
         /// can be called when UI is not up
         /// </summary>
-        void AssumePosture(double[] postureValues)
+        private void AssumePosture(double?[] postureValues)
         {
-            brickConnector.setShoulderPan(postureValues[0]);
-            brickConnector.setShoulderTilt(postureValues[1]);
-            brickConnector.setShoulderTurn(postureValues[2]);
-            brickConnector.setElbowAngle(postureValues[3]);
-            brickConnector.setThumb(postureValues[4]);
-            brickConnector.setIndexFinger(postureValues[5]);
-            brickConnector.setMiddleFinger(postureValues[6]);
-            brickConnector.setPinky(postureValues[7]);
-            brickConnector.setWristTurn(postureValues[8]);
+            if (postureValues[8].HasValue) brickConnector.setWristTurn(postureValues[8].Value);
+            if (postureValues[2].HasValue) brickConnector.setShoulderTurn(postureValues[2].Value);
+            if (postureValues[1].HasValue) brickConnector.setShoulderTilt(postureValues[1].Value);
+            if (postureValues[3].HasValue) brickConnector.setElbowAngle(postureValues[3].Value);
+            if (postureValues[0].HasValue) brickConnector.setShoulderPan(postureValues[0].Value);
+            if (postureValues[5].HasValue) brickConnector.setIndexFinger(postureValues[5].Value);
+            if (postureValues[6].HasValue) brickConnector.setMiddleFinger(postureValues[6].Value);
+            if (postureValues[7].HasValue) brickConnector.setPinky(postureValues[7].Value);
+            if (postureValues[4].HasValue) brickConnector.setThumb(postureValues[4].Value);
         }
 
         /// <summary>
         /// call from UI thread when UI is up.
         /// Will set scrollbars and that will call their respective "*_ValueChanged()" handlers
         /// </summary>
-        void AssumePostureScrollbars(double[] postureValues)
+        private async Task AssumePostureScrollbars(double?[] postureValues)
         {
-            panScrollBar.Value = postureValues[0];
-            tiltScrollBar.Value = postureValues[1];
-            turnScrollBar.Value = postureValues[2];
-            elbowScrollBar.Value = postureValues[3];
-            thumbScrollBar.Value = postureValues[4];
-            indexFingerScrollBar.Value = postureValues[5];
-            middleFingerScrollBar.Value = postureValues[6];
-            pinkyScrollBar.Value = postureValues[7];
-            wristTurnScrollBar.Value = postureValues[8];
+            int waitIntervalMs = 300;
+
+            if (postureValues[8].HasValue)
+            {
+                wristTurnScrollBar.Value = postureValues[8].Value;
+                await Task.Delay(waitIntervalMs);
+            }
+            if (postureValues[2].HasValue)
+            {
+                turnScrollBar.Value = postureValues[2].Value;
+                await Task.Delay(waitIntervalMs);
+            }
+            if (postureValues[1].HasValue)
+            {
+                tiltScrollBar.Value = postureValues[1].Value;
+                await Task.Delay(waitIntervalMs);
+            }
+            if (postureValues[3].HasValue)
+            {
+                elbowScrollBar.Value = postureValues[3].Value;
+                await Task.Delay(waitIntervalMs);
+            }
+            if (postureValues[0].HasValue)
+            {
+                panScrollBar.Value = postureValues[0].Value;
+                await Task.Delay(waitIntervalMs);
+            }
+            if (postureValues[5].HasValue)
+            {
+                indexFingerScrollBar.Value = postureValues[5].Value;
+                await Task.Delay(waitIntervalMs);
+            }
+            if (postureValues[6].HasValue)
+            {
+                middleFingerScrollBar.Value = postureValues[6].Value;
+                await Task.Delay(waitIntervalMs);
+            }
+            if (postureValues[7].HasValue)
+            {
+                pinkyScrollBar.Value = postureValues[7].Value;
+                await Task.Delay(waitIntervalMs);
+            }
+            if (postureValues[4].HasValue)
+            {
+                thumbScrollBar.Value = postureValues[4].Value;
+                await Task.Delay(waitIntervalMs);
+            }
         }
 
         delegate void UpdateLabelDelegate(string txt);
@@ -359,26 +413,91 @@ namespace WpfHandTest
             setWristTurn(e.NewValue);
         }
 
-        private void SafePostureButton_Click(object sender, RoutedEventArgs e)
+        private async void SafePostureButton_Click(object sender, RoutedEventArgs e)
         {
-            AssumePostureScrollbars(SafePostures);
+            await AssumePostureScrollbars(SafePosture);
         }
 
         #endregion // Controls actions - button clicks etc
 
-        private void HandUpButton_Click(object sender, RoutedEventArgs e)
+        private async void HandUpButton_Click(object sender, RoutedEventArgs e)
         {
-            AssumePostureScrollbars(HandUpPostures);
+            await AssumePostureScrollbars(HandUpPosture);
         }
 
-        private void HandDownButton_Click(object sender, RoutedEventArgs e)
+        private async void HandDownButton_Click(object sender, RoutedEventArgs e)
         {
-            AssumePostureScrollbars(HandDownPostures);
+            await AssumePostureScrollbars(HandDownPosture);
         }
 
-        private void ZeroButton_Click(object sender, RoutedEventArgs e)
+        private async void HandForwardButton_Click(object sender, RoutedEventArgs e)
         {
-            AssumePostureScrollbars(ZeroPostures);
+            await AssumePostureScrollbars(HandForwardPosture);
+        }
+
+        private async void HandChestButton_Click(object sender, RoutedEventArgs e)
+        {
+            await AssumePostureScrollbars(HandChestPosture);
+        }
+
+        private async void HandGrabPrepareButton_Click(object sender, RoutedEventArgs e)
+        {
+            await AssumePostureScrollbars(HandForwardGrabPreparePosture);
+        }
+
+        private async void HandForwardGrabButton_Click(object sender, RoutedEventArgs e)
+        {
+            await AssumePostureScrollbars(HandForwardGrabPosture);
+        }
+
+        private async void ZeroButton_Click(object sender, RoutedEventArgs e)
+        {
+            await AssumePostureScrollbars(ZeroPosture);
+        }
+
+        private async void AnimateGrabBottleButton_Click(object sender, RoutedEventArgs e)
+        {
+            int waitIntervalMs = 5000;
+            int waitIntervalShortMs = 2500;
+
+            GrabBottleButton.IsEnabled = false;
+
+            Debug.WriteLine("GrabBottleButton_Click - Chest");
+            speak("Chest");
+            await AssumePostureScrollbars(HandChestPosture);
+            await Task.Delay(waitIntervalMs);
+
+            Debug.WriteLine("Grab Prepare");
+            speak("Grab Prepare");
+            await AssumePostureScrollbars(HandForwardGrabPreparePosture);
+            await Task.Delay(waitIntervalShortMs);
+
+            Debug.WriteLine("Grab");
+            speak("Grab");
+            await AssumePostureScrollbars(GrabPosture);
+            await Task.Delay(waitIntervalShortMs);
+
+            Debug.WriteLine("Chest again");
+            speak("Chest again");
+            await AssumePostureScrollbars(HandChestPosture);
+            await Task.Delay(waitIntervalMs);
+
+            Debug.WriteLine("Hand Forward - give");
+            speak("Give");
+            await AssumePostureScrollbars(HandForwardPosture);
+            await Task.Delay(waitIntervalMs);
+
+            speak("Release");
+            await AssumePostureScrollbars(GrabReleasePosture);
+            await Task.Delay(waitIntervalMs);
+            Debug.WriteLine("Chest again finally");
+
+            speak("Safe Posture");
+            await AssumePostureScrollbars(SafePosture);
+            await Task.Delay(waitIntervalMs);
+
+            speak("Done");
+            GrabBottleButton.IsEnabled = true;
         }
     }
 }

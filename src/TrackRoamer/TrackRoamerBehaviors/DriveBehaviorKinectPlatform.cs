@@ -29,6 +29,7 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
          */
 
         protected double? kinectPanDesiredDegrees = null;     // degrees, relative to robot; usually pointing to target; used as a setpoint for PID controlling the platform servo. Current measured turn is in _state.currentPanKinect
+        protected Object kinectPanDesiredDegreesLock = new Object();
         protected int kinectTiltDesiredDegrees = 5;
 
         // Kinect Pan actual degrees stored in _state.currentPanKinect
@@ -80,6 +81,9 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
         private bool KinectPlatformCalibratedOk = false;
         private bool KinectPlatformCalibrationInProgress = false;
         private int panKinectMksLast = 0;
+
+        private int panKinectMksMin = 1000;      // will be overwritten based on calibration
+        private int panKinectMksMax = 2000;
 
         private IEnumerator<ITask> CalibrateKinectPlatform()
         {
@@ -156,21 +160,24 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
             Tracer.Trace("Checking calibration at -70 - measured value is " + currentPanKinect + " degrees");
             */
 
-            KinectPlatformCalibrationInProgress = false;
-
             // do some sanity checking:
             KinectPlatformCalibratedOk =
                                    analogValueAtM70 > 510 && analogValueAtM70 < 670
                                 && analogValueAt0   > 340 && analogValueAt0   < 470
-                                && analogValueAtP70 > 180 && analogValueAtP70 < 280;
+                                && analogValueAtP70 > 100 && analogValueAtP70 < 280;
 
             Talker.Say(9, KinectPlatformCalibratedOk ? "Finished Calibrating" : "Error! Error! Error Calibrating Kinect Platform");
+
+            KinectPlatformCalibrationInProgress = false;
 
             // if calibration succeeded, the platform will be smoothly handled in computeAndExecuteKinectPlatformTurn() using PID and EMA.
             SetDesiredKinectPlatformPan(0.0d);
             SetDesiredKinectTilt(5.0d);    // slightly up, expecting a human
             if (KinectPlatformCalibratedOk)
             {
+                panKinectMksMin = 1000;
+                panKinectMksMax = 2000;
+
                 SpawnIterator(RunKinectPlatformPid);
             }
 
@@ -212,7 +219,10 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
 
         public void SetDesiredKinectPlatformPan(double? degrees)
         {
-            kinectPanDesiredDegrees = degrees;
+            lock (kinectPanDesiredDegreesLock)
+            {
+                kinectPanDesiredDegrees = degrees;
+            }
         }
 
         public void SetDesiredKinectTilt(double degrees)
@@ -257,6 +267,7 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
         private DateTime lastDisplayTime;
 
         private DateTime lastReadServos = DateTime.MinValue;
+        private double servoInputMks = 1500.0d;
 
         private bool usePID = true;
 
@@ -267,7 +278,15 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
         /// </summary>
         protected void computeAndExecuteKinectPlatformTurn()
         {
-            if (kinectPanDesiredDegrees.HasValue && !KinectPlatformCalibrationInProgress && KinectPlatformCalibratedOk)
+            double? panDegreesFromCenter = null;
+
+            lock (kinectPanDesiredDegreesLock)
+            {
+                // kinectPanDesiredDegrees can be changed to null while we are in this method - make local copy:
+                panDegreesFromCenter = kinectPanDesiredDegrees;
+            }
+
+            if (panDegreesFromCenter.HasValue && !KinectPlatformCalibrationInProgress && KinectPlatformCalibratedOk)
             {
                 DateTime tickTime = DateTime.Now;
                 ulong millis = (ulong)(tickTime.Ticks / TimeSpan.TicksPerMillisecond);
@@ -282,12 +301,12 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
 
                 double measuredValueMks = MapMeasuredPos(_state.currentPanKinect);
 
-                double panKinectSetpointMks = _panTiltAlignment.mksPanKinect(kinectPanDesiredDegrees.Value);
+                double panKinectSetpointMks = _panTiltAlignment.mksPanKinect(panDegreesFromCenter.Value);
 
                 double errorMks = panKinectSetpointMks - measuredValueMks;
 
                 // compute servo input:
-                double servoInputMks = ComputeServoInput(panKinectSetpointMks, measuredValueMks, millis);
+                servoInputMks = ComputeServoInputWithPID(servoInputMks, panKinectSetpointMks, measuredValueMks, millis);
 
                 // apply servo input to Kinect pan actuator. We spend around 1ms here:
                 if (usePID)
@@ -337,15 +356,20 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
 
         private void InitPid(ulong millis)
         {
-            double kp = 0.8d;
-            double ki = 0.01;
-            double kd = 0.04;
+            double kp = 0.0d;
+            double ki = 0.0d;
+            double kd = 0.0d;
+            double limits = 300.0d;     // PID output limits, a single cycle correction max
+
+            kp = 0.055d;
+            //ki = 0.000001d;
+            kd = 0.005d;
 
             pidA = new PIDControllerA(0, 0, 0, kp, ki, kd, PidDirection.DIRECT, millis);
 
             pidA.SetSampleTime(pidSampleTimeMs);
 
-            pidA.SetOutputLimits(-600, 600, 70);
+            pidA.SetOutputLimits(-limits, limits, 70);
 
             pidA.Initialize();
         }
@@ -357,10 +381,14 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
         /// <param name="measuredValueMks"></param>
         /// <param name="millis">current time value</param>
         /// <returns></returns>
-        private double ComputeServoInput(double setpointMks, double measuredValueMks, ulong millis)
+        private double ComputeServoInputWithPID(double servoInputMks, double setpointMks, double measuredValueMks, ulong millis)
         {
             // we come here every 50ms, millis is a very large number increasing by 50 every time
-            double servoInputMks; // = setpointMks;
+            //servoInputMks = setpointMks;
+
+            // don't allow PID inputs exceed platform limitations:
+            setpointMks = GeneralMath.constrain(setpointMks, (double)panKinectMksMin, (double)panKinectMksMax);
+            measuredValueMks = GeneralMath.constrain(measuredValueMks, (double)panKinectMksMin, (double)panKinectMksMax);
 
             pidA.mySetpoint = setpointMks;          // around 1500. Where we want to be.
             pidA.myInput = measuredValueMks;        // around 1500. Where we currently are.
@@ -372,8 +400,8 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
 
             //Tracer.Trace("pidA:  setpointMks=" + setpointMks + "     measuredValueMks=" + measuredValueMks + "    millis=" + millis + "     pidA.myOutput=" + pidA.myOutput);
 
-            servoInputMks = measuredValueMks + pidA.myOutput;
-            //servoInputMks = pidA.myOutput;
+            // don't allow PID output exceed platform limitations:
+            servoInputMks = GeneralMath.constrain(servoInputMks + pidA.myOutput, (double)panKinectMksMin, (double)panKinectMksMax);
 
             return servoInputMks;
         }

@@ -44,12 +44,14 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
 
         private string[] messagesToGreetHuman = new string[] {
             "Good day, human",
+            "Welcome to San Diego Makers Faire",
             "I am Track roamer, your future overlord!",
-            "I can see your hands. Do you want to play a game?",
+            "you know, robots will rule the world",
+            "I can see your hands. I can flash lights as you move your hands",
             "Hold your left hand out, watch the light",
             "Hold out both hands, watch the lights",
-            "I don't like people pointing both arms at me - try that!",
-            "If you put your hands up I will shoot foam arrows at you",
+            "I will get angry if you point both arms at me - try that!",
+            "If you put your hands up I will flash red lights", //shoot foam arrows at you",
             "Never surrender!",
             "You can surrender to me of course. Everybody does. I understand that.",
             "Have a nice day, Human. And be nice to your robot masters."

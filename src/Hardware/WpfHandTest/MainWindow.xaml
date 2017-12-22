@@ -33,11 +33,11 @@
                 <ScrollBar Height="21" HorizontalAlignment="Left" Margin="117,104,0,0" Name="elbowScrollBar" Orientation="Horizontal" VerticalAlignment="Top" Width="177" ValueChanged="elbowScrollBar_ValueChanged" Minimum="-35" Maximum="45" Value="0" LargeChange="10" SmallChange="1" />
                 <Label Content="Elbow Angle:" Height="28" HorizontalAlignment="Left" Margin="19,101,0,0" Name="label4" VerticalAlignment="Top" />
 
-                
+
                 <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="308,142,0,0" x:Name="thumbMksLabel" VerticalAlignment="Top" />
-                <ScrollBar Height="21" HorizontalAlignment="Left" Margin="117,145,0,0" x:Name="thumbScrollBar" Orientation="Horizontal" VerticalAlignment="Top" Width="177" ValueChanged="thumbScrollBar_ValueChanged" Minimum="-60" Maximum="60" Value="0" LargeChange="10" SmallChange="1" />
+                <ScrollBar Height="21" HorizontalAlignment="Left" Margin="117,145,0,0" x:Name="thumbScrollBar" Orientation="Horizontal" VerticalAlignment="Top" Width="177" ValueChanged="thumbScrollBar_ValueChanged" Minimum="-90" Maximum="90" Value="0" LargeChange="10" SmallChange="1" />
                 <Label Content="Thumb:" Height="28" HorizontalAlignment="Left" Margin="19,142,0,0" x:Name="label5" VerticalAlignment="Top" />
-                
+
                 <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="308,173,0,0" x:Name="indexFingerMksLabel" VerticalAlignment="Top" />
                 <ScrollBar Height="21" HorizontalAlignment="Left" Margin="117,175,0,0" x:Name="indexFingerScrollBar" Orientation="Horizontal" VerticalAlignment="Top" Width="177" ValueChanged="indexFingerScrollBar_ValueChanged" Minimum="-60" Maximum="60" Value="0" LargeChange="10" SmallChange="1" />
                 <Label Content="Index Finger:" Height="28" HorizontalAlignment="Left" Margin="19,173,0,0" x:Name="label6" VerticalAlignment="Top" />
@@ -45,20 +45,29 @@
                 <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="308,201,0,0" x:Name="middleFingerMksLabel" VerticalAlignment="Top" />
                 <ScrollBar Height="21" HorizontalAlignment="Left" Margin="117,205,0,0" x:Name="middleFingerScrollBar" Orientation="Horizontal" VerticalAlignment="Top" Width="177" ValueChanged="middleFingerScrollBar_ValueChanged" Minimum="-60" Maximum="60" Value="0" LargeChange="10" SmallChange="1" />
                 <Label Content="Middle Finger:" Height="28" HorizontalAlignment="Left" Margin="19,202,0,0" x:Name="label7" VerticalAlignment="Top" />
-                
+
                 <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="308,233,0,0" x:Name="pinkyMksLabel" VerticalAlignment="Top" />
                 <ScrollBar Height="21" HorizontalAlignment="Left" Margin="117,236,0,0" x:Name="pinkyScrollBar" Orientation="Horizontal" VerticalAlignment="Top" Width="177" ValueChanged="pinkyScrollBar_ValueChanged" Minimum="-60" Maximum="60" Value="0" LargeChange="10" SmallChange="1" />
                 <Label Content="Pinky:" Height="28" HorizontalAlignment="Left" Margin="19,233,0,0" x:Name="label8" VerticalAlignment="Top" />
-                
+
                 <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="308,264,0,0" x:Name="wristTurnMksLabel" VerticalAlignment="Top" />
                 <ScrollBar Height="21" HorizontalAlignment="Left" Margin="117,267,0,0" x:Name="wristTurnScrollBar" Orientation="Horizontal" VerticalAlignment="Top" Width="177" ValueChanged="wristTurnScrollBar_ValueChanged" Minimum="-60" Maximum="60" Value="0" LargeChange="10" SmallChange="1" />
                 <Label Content="Wrist:" Height="28" HorizontalAlignment="Left" Margin="19,264,0,0" x:Name="label9" VerticalAlignment="Top" />
-                <GroupBox Header="Pre-programmed Positions" HorizontalAlignment="Left" Margin="722,20,0,0" VerticalAlignment="Top" Height="272" Width="202">
-                    <Grid HorizontalAlignment="Left" Height="249.6" VerticalAlignment="Top" Width="188.8">
+                <GroupBox Header="Pre-programmed Positions" Margin="695,5,9.6,0" VerticalAlignment="Top" Height="310">
+                    <Grid>
                         <Button x:Name="SafePostureButton" Content="Safe Posture" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="SafePostureButton_Click" Background="#FFFF9962"/>
-                        <Button x:Name="HandUpButton" Content="Hand Up" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Width="75" Click="HandUpButton_Click"/>
-                        <Button x:Name="HandDownButton" Content="Hand Down" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="75" Click="HandDownButton_Click"/>
+                        <Button x:Name="HandUpButton" Content="Hand Up" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="75" Click="HandUpButton_Click"/>
+                        <Button x:Name="HandDownButton" Content="Hand Down" HorizontalAlignment="Left" Margin="104,40,0,0" VerticalAlignment="Top" Width="75" Click="HandDownButton_Click"/>
                         <Button x:Name="ZeroButton" Content="Zero" HorizontalAlignment="Left" Margin="104,10,0,0" VerticalAlignment="Top" Width="75" Click="ZeroButton_Click"/>
+                        <Button x:Name="HandForwardButton" Content="Hand Forward" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="119" Click="HandForwardButton_Click"/>
+                        <Button x:Name="HandChestButton" Content="Hand to Chest" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" Width="119" Click="HandChestButton_Click"/>
+                        <Button x:Name="HandGrabPrepareButton" Content="Hand Grab Prepare" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" Width="119" Click="HandGrabPrepareButton_Click"/>
+                        <Button x:Name="HandGrabButton" Content="Hand Grab" HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top" Width="119" Click="HandForwardGrabButton_Click"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="AnimationsGroupBox" Header="Animations" HorizontalAlignment="Left" Margin="454,204,0,0" VerticalAlignment="Top" Height="111" Width="227">
+                    <Grid>
+                        <Button x:Name="GrabBottleButton" Content="Grab Bottle" HorizontalAlignment="Left" Margin="7,6,0,0" VerticalAlignment="Top" Width="75" Click="AnimateGrabBottleButton_Click"/>
                     </Grid>
                 </GroupBox>
 

@@ -120,7 +120,7 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
                         break;
 
                     default:
-                        talkerToHuman.Say(9, SkeletonPoseToSpokenString(skeletonPose));
+                        talkerToHuman.Say(9, "Your " + SkeletonPoseToSpokenString(skeletonPose));
                         break;
                 }
 

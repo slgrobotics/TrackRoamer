@@ -53,6 +53,8 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
 
         private TrackRoamerBehaviorsState _state;
 
+        private double KinectNykoGlassesFactor = 1.0d;
+
         // when considering skeletons, we use Head and one more joint, for which we calculate Pan/Tilt/DistanceMeters
         public JointType jointTypeOfInterest = JointType.Spine;
 
@@ -60,10 +62,15 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
         /// We need to initialize Kinect port - since we'll be talking to the service
         /// </summary>
         /// <param name="kinectPort"></param>
-        public FramePreProcessor(kinectProxy.KinectOperations kinectPort, TrackRoamerBehaviorsState state)
+        public FramePreProcessor(kinectProxy.KinectOperations kinectPort, TrackRoamerBehaviorsState state, bool useKinectNykoGlasses)
         {
             this.kinectPort = kinectPort;
             _state = state;
+
+            if (useKinectNykoGlasses)
+            {
+                KinectNykoGlassesFactor = 1.25d;
+            }
         }
 
         /// <summary>
@@ -277,9 +284,9 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
                         vj.JointCoordinates = this.cachedJointPoint;
                         vj.TrackingState = joint.TrackingState;
 
-                        vj.X = skel.Joints[joint.JointType].Position.X;
-                        vj.Y = skel.Joints[joint.JointType].Position.Y;
-                        vj.Z = skel.Joints[joint.JointType].Position.Z;
+                        vj.X = skel.Joints[joint.JointType].Position.X / KinectNykoGlassesFactor;
+                        vj.Y = skel.Joints[joint.JointType].Position.Y / KinectNykoGlassesFactor;
+                        vj.Z = skel.Joints[joint.JointType].Position.Z / KinectNykoGlassesFactor;
 
                         vj.ComputePanTilt();
 
