@@ -1,5 +1,7 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32929.386
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackRoamerServices", "TrackRoamerServices\TrackRoamerServices.csproj", "{9A23AC2E-6051-4752-8743-F6930160C5A5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E281BA4C-D68E-46FA-BA67-299EDAE569EB} = {E281BA4C-D68E-46FA-BA67-299EDAE569EB}
@@ -116,5 +118,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04B9C5F7-E6BB-4002-B6A5-98220449C298}
 	EndGlobalSection
 EndGlobal

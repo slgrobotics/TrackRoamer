@@ -17,7 +17,7 @@ namespace TrackRoamer.Robotics.Utility.LibSystem
 	public class Tracer
 	{
         private static string m_traceFileName;
-        public static bool doFileTrace = true;
+        public static bool doFileTrace = false;
 
         public static string ApplicationStartupPath { get; private set; }
 

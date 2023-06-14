@@ -796,7 +796,7 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBrickPower
                 double? leftSpeed = _state.MotorSpeed.LeftSpeed;
                 double? rightSpeed = _state.MotorSpeed.RightSpeed;
 
-                Tracer.Trace("IP: TrackRoamerBrickPowerService:UpdateMotorSpeedHandler - speed  L: " + leftSpeed + "    R: " + rightSpeed);
+                //Tracer.Trace("IP: TrackRoamerBrickPowerService:UpdateMotorSpeedHandler - speed  L: " + leftSpeed + "    R: " + rightSpeed);
 
                 // it will take time for upper layers to react on whiskers. We want to have some protection here, to avoid damage.
                 // Note: while moving forward the speeds are negative.

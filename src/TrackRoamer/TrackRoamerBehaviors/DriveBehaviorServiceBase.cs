@@ -1582,6 +1582,8 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
             {
                 lastGuiTactics = tactics;
 
+                Tracer.Trace("tactics: " + tactics);
+
                 ccrwpf.Invoke invoke = new ccrwpf.Invoke(delegate()
                 {
                     _mainWindow.CurrentTactics = tactics;

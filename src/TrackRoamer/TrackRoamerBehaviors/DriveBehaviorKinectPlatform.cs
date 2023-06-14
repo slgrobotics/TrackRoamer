@@ -232,26 +232,66 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
             kinectTiltDesiredDegrees = d;
         }
 
+        private int lastKinectTiltDegrees = 0;
+
         public void UpdateKinectTilt(int degrees)
         {
+           Tracer.Trace("Kinect tilt: desired degrees: " + degrees);
+
+            /*
+             * Nothing I tried worked here. It hangs for a second, preventing main loop flow.
+             * 
+
+           if(degrees == lastKinectTiltDegrees)
+            {
+                return;
+            }
+
+            lastKinectTiltDegrees = degrees; // fault or success
+
             kinectProxy.UpdateTiltRequest request = new kinectProxy.UpdateTiltRequest();
             request.Tilt = degrees;
+ 
+            Tracer.Trace("Kinect tilt: trying...    degrees: " + degrees);
 
             Activate(
-                Arbiter.Choice(
-                    this.kinectPort.UpdateTilt(request),
+            this.kinectPort.UpdateTilt(request).Choice(   // this will hang for a second or two, can't call it often
                     success =>
                     {
                         // nothing to do
+                        Tracer.Trace("Kinect tilt: success, degrees: " + degrees);
                     },
                     fault =>
                     {
+                        Tracer.Error("failed to update Kinect tilt to degrees: " + degrees);
+                        // the fault handler is outside the WPF dispatcher
+                        // to perfom any UI related operation we need to go through the WPF adapter
+
+                        // show an error message
+                        this.wpfServicePort.Invoke(() => this.userInterface.ShowFault(fault));
+                    }
+                ));
+            */
+
+            /*
+            Activate(
+                Arbiter.Choice(
+                    this.kinectPort.UpdateTilt(request),   // this will hang for a second or two, can't call it often
+                    success =>
+                    {
+                        // nothing to do
+                        Tracer.Trace("tilt: success, degrees: " + degrees);
+                    },
+                    fault =>
+                    {
+                        Tracer.Error("failed to update Kinect tilt to degrees: " + degrees);
                         // the fault handler is outside the WPF dispatcher
                         // to perfom any UI related operation we need to go through the WPF adapter
 
                         // show an error message
                         this.wpfServicePort.Invoke(() => this.userInterface.ShowFault(fault));
                     }));
+            */
         }
 
         #endregion // Kinect Tilt control

@@ -166,10 +166,12 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
                         double compSum = compR + compG + compB;         // brightness
                         averageBrightnessTmp += compSum;
 
-                        if (compR > colorTresholdMain) //&& compG > colorTreshold && compB > colorTreshold)
+                        //if (compR > colorTresholdMain) //&& compG > colorTreshold && compB > colorTreshold)
+                        if (compR > colorTresholdMain && compG > colorTresholdMain) //&& compG > colorTreshold && compB > colorTreshold)
                         {
                             compR = (compR / compSum) / colorFactorMain;    // adjusted for brightness
-                            compG = compG / compSum;
+                            //compG = compG / compSum;
+                            compG = (compG / compSum) / colorFactorMain;    // adjusted for brightness
                             compB = compB / compSum;
                             if (compR > compG && compR > compB)
                             {

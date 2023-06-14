@@ -38,7 +38,7 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
 {
     partial class TrackRoamerBehaviorsService : DsspServiceBase
     {
-        private int DecisionMainLoopWaitIntervalMs = 100;     // time to wait in the main loop to keep it from taking all CPU time.
+        private int DecisionMainLoopWaitIntervalMs = 50;// 100;     // time to wait in the main loop to keep it from taking all CPU time.
 
         protected DateTime lastDeepThinking = DateTime.MinValue;
 
@@ -63,29 +63,35 @@ namespace TrackRoamer.Robotics.Services.TrackRoamerBehaviors
         {
             while (true)
             {
-                //Tracer.Trace("...thinking deep...");
+                try
+                {
+                    //Tracer.Trace("...thinking deep... then sleep ms: " + DecisionMainLoopWaitIntervalMs);
 
-                lastDeepThinking = DateTime.Now;
+                    lastDeepThinking = DateTime.Now;
 
-                // Perform SLAM computations:
+                    // Perform SLAM computations:
 
-                Slam();
+                    Slam();
 
-                // interact with humans
-                Interaction();
+                    // interact with humans
+                    Interaction();
 
-                // now actually make a decision and execute it:
+                    // now actually make a decision and execute it:
 
-                Strategy();     // see what moves are appropriate for current task and situation
+                    Strategy();     // see what moves are appropriate for current task and situation
 
-                setGuiCurrentTactics(_mapperVicinity.robotState.robotTacticsType);      // display which tactics is selected by Strategy, put it in the combo box in the Mapping window
+                    setGuiCurrentTactics(_mapperVicinity.robotState.robotTacticsType);      // display which tactics is selected by Strategy, put it in the combo box in the Mapping window
 
-                Tactics();      // execute the moves, if not restricted by the CollisionState
+                    Tactics();      // execute the moves, if not restricted by the CollisionState
 
-                AdjustKinectTilt();
+                    AdjustKinectTilt();
 
-                // poll N times a sec
-                yield return TimeoutPort(DecisionMainLoopWaitIntervalMs).Receive();
+                    // poll N times a sec
+                    yield return TimeoutPort(DecisionMainLoopWaitIntervalMs).Receive();
+                }
+                finally
+                {
+                }
             }
         }
 
